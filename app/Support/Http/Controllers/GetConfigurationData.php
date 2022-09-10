@@ -101,11 +101,7 @@ trait GetConfigurationData
         /** @var Carbon $first */
         $first    = session('first');
         $title    = sprintf('%s - %s', $start->isoFormat($this->monthAndDayFormat), $end->isoFormat($this->monthAndDayFormat));
-
-        $ranges   = [
-            // first range is the current range:
-            $title => [$start, $end],
-        ];
+        $ranges   = [];
 
 	$today = today(config('app.timezone'));
 
@@ -119,18 +115,6 @@ trait GetConfigurationData
 	$index      = app('navigation')->periodShow($rangestart, $month);
 	$ranges[$index] = [$rangestart, $rangeend];
 
-	// current quarter
-	$rangestart = app('navigation')->startOfPeriod($today, $quarter);
-	$rangeend   = app('navigation')->endOfPeriod($today, $quarter);
-	$index      = app('navigation')->periodShow($rangestart, $quarter);
-	$ranges[$index] = [$rangestart, $rangeend];
-
-	// current year
-	$rangestart = app('navigation')->startOfPeriod($today, $year);
-	$rangeend   = app('navigation')->endOfPeriod($today, $year);
-	$index      = app('navigation')->periodShow($rangestart, $year);
-	$ranges[$index] = [$rangestart, $rangeend];
-
 	// previous month
 	$previousDate   = app('navigation')->subtractPeriod($today, $month);
 	$previousStart  = app('navigation')->startOfPeriod($previousDate, $month);
@@ -138,12 +122,11 @@ trait GetConfigurationData
 	$index          = app('navigation')->periodShow($previousDate, $month);
 	$ranges[$index] = [$previousStart, $previousEnd];
 
-	// previous quarter
-	$previousDate   = app('navigation')->subtractPeriod($today, $quarter);
-	$previousStart  = app('navigation')->startOfPeriod($previousDate, $quarter);
-	$previousEnd    = app('navigation')->endOfPeriod($previousStart, $quarter);
-	$index          = app('navigation')->periodShow($previousDate, $quarter);
-	$ranges[$index] = [$previousStart, $previousEnd];
+	// current year
+	$rangestart = app('navigation')->startOfPeriod($today, $year);
+	$rangeend   = app('navigation')->endOfPeriod($today, $year);
+	$index      = app('navigation')->periodShow($rangestart, $year);
+	$ranges[$index] = [$rangestart, $rangeend];
 
 	// previous year
 	$previousDate   = app('navigation')->subtractPeriod($today, $year);
@@ -166,9 +149,14 @@ trait GetConfigurationData
         $ranges[$index] = [$thirty, new Carbon];
 
 	// last 90 days
-        $thirty         = Carbon::now()->subDays(90);
+        $ninety         = Carbon::now()->subDays(90);
         $index          = (string) trans('firefly.pref_last90');
-        $ranges[$index] = [$thirty, new Carbon];
+        $ranges[$index] = [$ninety, new Carbon];
+
+	// last 180 days
+        $oneeighty      = Carbon::now()->subDays(180);
+        $index          = (string) trans('firefly.last_180_days');
+        $ranges[$index] = [$oneeighty, new Carbon];
 
 	// last year
         $yeardays       = Carbon::now()->subDays(365);
