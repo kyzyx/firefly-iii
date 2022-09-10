@@ -102,10 +102,7 @@ trait GetConfigurationData
         $first    = session('first');
         $title    = sprintf('%s - %s', $start->isoFormat($this->monthAndDayFormat), $end->isoFormat($this->monthAndDayFormat));
 
-        $ranges   = [
-            // first range is the current range:
-            $title => [$start, $end],
-        ];
+        $ranges   = [];
 
 	$today = today(config('app.timezone'));
 
