@@ -113,50 +113,50 @@ trait GetConfigurationData
 	$year           = (string) app('preferences')->get('viewRange', '1M')->data;
 
 	// current month
-        $index = (string) trans('firefly.pref_MTD');
 	$rangestart = app('navigation')->startOfPeriod($today, $month);
 	$rangeend   = app('navigation')->endOfPeriod($today, $month);
+	$index      = app('navigation')->periodShow($rangestart, $month);
 	$ranges[$index] = [$rangestart, $rangeend];
 
 	// current quarter
-        $index = (string) trans('firefly.pref_QTD');
 	$rangestart = app('navigation')->startOfPeriod($today, $quarter);
 	$rangeend   = app('navigation')->endOfPeriod($today, $quarter);
+	$index      = app('navigation')->periodShow($rangestart, $quarter);
 	$ranges[$index] = [$rangestart, $rangeend];
 
 	// current year
-        $index = (string) trans('firefly.pref_YTD');
 	$rangestart = app('navigation')->startOfPeriod($today, $year);
 	$rangeend   = app('navigation')->endOfPeriod($today, $year);
+	$index      = app('navigation')->periodShow($rangestart, $year);
 	$ranges[$index] = [$rangestart, $rangeend];
 
 	// previous month
 	$previousDate   = app('navigation')->subtractPeriod($today, $month);
-	$index          = app('navigation')->periodShow($previousDate, $month);
 	$previousStart  = app('navigation')->startOfPeriod($previousDate, $month);
 	$previousEnd    = app('navigation')->endOfPeriod($previousStart, $month);
+	$index          = app('navigation')->periodShow($previousDate, $month);
 	$ranges[$index] = [$previousStart, $previousEnd];
 
 	// previous quarter
 	$previousDate   = app('navigation')->subtractPeriod($today, $quarter);
-	$index          = app('navigation')->periodShow($previousDate, $quarter);
 	$previousStart  = app('navigation')->startOfPeriod($previousDate, $quarter);
 	$previousEnd    = app('navigation')->endOfPeriod($previousStart, $quarter);
+	$index          = app('navigation')->periodShow($previousDate, $quarter);
 	$ranges[$index] = [$previousStart, $previousEnd];
 
 	// previous year
 	$previousDate   = app('navigation')->subtractPeriod($today, $year);
-	$index          = app('navigation')->periodShow($previousDate, $year);
 	$previousStart  = app('navigation')->startOfPeriod($previousDate, $year);
 	$previousEnd    = app('navigation')->endOfPeriod($previousStart, $year);
+	$index          = app('navigation')->periodShow($previousDate, $year);
 	$ranges[$index] = [$previousStart, $previousEnd];
 
 	// previous-previous year
 	$previousYear   = app('navigation')->subtractPeriod($today, $year);
 	$previousDate   = app('navigation')->subtractPeriod($previousYear, $year);
-	$index          = app('navigation')->periodShow($previousDate, $year);
 	$previousStart  = app('navigation')->startOfPeriod($previousDate, $year);
 	$previousEnd    = app('navigation')->endOfPeriod($previousStart, $year);
+	$index          = app('navigation')->periodShow($previousDate, $year);
 	$ranges[$index] = [$previousStart, $previousEnd];
 
 	// last 30 days
