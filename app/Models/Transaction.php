@@ -265,7 +265,8 @@ class Transaction extends Model
      */
     protected function amount(): Attribute
     {
-        return Attribute::make(
+        //return Attribute::make(
+        return new Attribute(
             get: fn($value) => (string) $value,
         );
     }
@@ -277,7 +278,8 @@ class Transaction extends Model
      */
     protected function foreignAmount(): Attribute
     {
-        return Attribute::make(
+        //return Attribute::make(
+        return new Attribute(
             get: fn($value) => (string) $value,
         );
     }
