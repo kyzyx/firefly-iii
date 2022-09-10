@@ -42,13 +42,13 @@ class PiggyBankUpdateRequest extends FormRequest
     public function getPiggyBankData(): array
     {
         return [
-            'name'               => $this->string('name'),
+            'name'               => $this->convertString('name'),
             'startdate'          => $this->getCarbonDate('startdate'),
             'account_id'         => $this->integer('account_id'),
-            'targetamount'       => $this->string('targetamount'),
+            'targetamount'       => $this->convertString('targetamount'),
             'targetdate'         => $this->getCarbonDate('targetdate'),
             'notes'              => $this->stringWithNewlines('notes'),
-            'object_group_title' => $this->string('object_group'),
+            'object_group_title' => $this->convertString('object_group'),
         ];
     }
 
@@ -65,7 +65,7 @@ class PiggyBankUpdateRequest extends FormRequest
         return [
             'name'         => sprintf('required|between:1,255|uniquePiggyBankForUser:%d', $piggy->id),
             'account_id'   => 'required|belongsToUser:accounts',
-            'targetamount' => 'required|numeric|gte:0.01|max:1000000000',
+            'targetamount' => 'nullable|numeric|max:1000000000',
             'startdate'    => 'date',
             'targetdate'   => 'date|nullable',
             'order'        => 'integer|min:1',

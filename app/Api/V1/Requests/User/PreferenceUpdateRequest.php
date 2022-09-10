@@ -38,7 +38,7 @@ class PreferenceUpdateRequest extends FormRequest
     public function getAll(): array
     {
         $array = [
-            'name' => $this->string('name'),
+            'name' => $this->convertString('name'),
             'data' => $this->get('data'),
         ];
         if ('true' === $array['data']) {
@@ -48,7 +48,7 @@ class PreferenceUpdateRequest extends FormRequest
             $array['data'] = false;
         }
         if (is_numeric($array['data'])) {
-            $array['data'] = (float)$array['data'];
+            $array['data'] = (float) $array['data'];
         }
 
         return $array;

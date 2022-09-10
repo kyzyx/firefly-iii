@@ -24,6 +24,15 @@ declare(strict_types=1);
 
 return [
     'home'                   => 'Início',
+    'budgets'                => 'Orçamentos',
+    'subscriptions'          => 'Assinaturas',
+    'transactions'           => 'Transações',
+    'title_expenses'         => 'Despesas',
+    'title_withdrawal'       => 'Despesas',
+    'title_revenue'          => 'Receita / Renda',
+    'title_deposit'          => 'Receita / Renda',
+    'title_transfer'         => 'Transferências',
+    'title_transfers'        => 'Transferências',
     'edit_currency'          => 'Editar moeda ":name"',
     'delete_currency'        => 'Excluir moeda ":name"',
     'newPiggyBank'           => 'Criar um novo cofrinho',
@@ -57,8 +66,13 @@ return [
     'createTag'              => 'Criar nova etiqueta',
     'edit_tag'               => 'Editar etiqueta ":tag"',
     'delete_tag'             => 'Apagar etiqueta ":tag"',
-    'delete_journal_link'    => 'Eliminar ligação entre transações',
+    'delete_journal_link'    => 'Excluir vínculo entre transações',
     'edit_object_group'      => 'Editar grupo ":title"',
     'delete_object_group'    => 'Excluir grupo ":title"',
-    'logout_others'          => 'Sair de outras sessões'
+    'logout_others'          => 'Sair de outras sessões',
+    'asset_accounts'         => 'Contas de ativos',
+    'expense_accounts'       => 'Contas de despesas',
+    'revenue_accounts'       => 'Contas de receitas',
+    'liabilities_accounts'   => 'Passivos',
+    'placeholder'            => '[Placeholder]',
 ];

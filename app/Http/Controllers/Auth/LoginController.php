@@ -22,7 +22,6 @@ declare(strict_types=1);
 
 namespace FireflyIII\Http\Controllers\Auth;
 
-use Adldap;
 use Cookie;
 use DB;
 use FireflyIII\Events\ActuallyLoggedIn;
@@ -90,15 +89,6 @@ class LoginController extends Controller
         Log::channel('audit')->info(sprintf('User is trying to login using "%s"', $request->get($this->username())));
         Log::info('User is trying to login.');
 
-        $guard = config('auth.defaults.guard');
-
-        // if the user logs in using LDAP the field is also changed (per LDAP config)
-        if ('ldap' === $guard) {
-            Log::debug('User wishes to login using LDAP.');
-            $this->username = config('firefly.ldap_auth_field');
-        }
-
-
         $this->validateLogin($request);
         Log::debug('Login data is valid.');
 
@@ -139,40 +129,13 @@ class LoginController extends Controller
     }
 
     /**
-     * Log the user out of the application.
+     * Get the login username to be used by the controller.
      *
-     * @param Request $request
-     *
-     * @return Response
+     * @return string
      */
-    public function logout(Request $request)
+    public function username()
     {
-        $authGuard = config('firefly.authentication_guard');
-        $logoutUri = config('firefly.custom_logout_url');
-        if ('remote_user_guard' === $authGuard && '' !== $logoutUri) {
-            return redirect($logoutUri);
-        }
-        if ('remote_user_guard' === $authGuard && '' === $logoutUri) {
-            session()->flash('error', trans('firefly.cant_logout_guard'));
-        }
-
-        // also logout current 2FA tokens.
-        $cookieName = config('google2fa.cookie_name', 'google2fa_token');
-        Cookie::forget($cookieName);
-
-        $this->guard()->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        if ($response = $this->loggedOut($request)) {
-            return $response;
-        }
-
-        return $request->wantsJson()
-            ? new Response('', 204)
-            : redirect('/');
+        return $this->username;
     }
 
     /**
@@ -197,12 +160,51 @@ class LoginController extends Controller
     }
 
     /**
+     * Log the user out of the application.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function logout(Request $request)
+    {
+        $authGuard = config('firefly.authentication_guard');
+        $logoutUrl = config('firefly.custom_logout_url');
+        if ('remote_user_guard' === $authGuard && '' !== $logoutUrl) {
+            return redirect($logoutUrl);
+        }
+        if ('remote_user_guard' === $authGuard && '' === $logoutUrl) {
+            session()->flash('error', trans('firefly.cant_logout_guard'));
+        }
+
+        // also logout current 2FA tokens.
+        $cookieName = config('google2fa.cookie_name', 'google2fa_token');
+        Cookie::forget($cookieName);
+
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new Response('', 204)
+            : redirect('/');
+    }
+
+    /**
      * Show the application's login form.
      *
      * @param Request $request
      *
      * @return Factory|Application|View|Redirector|RedirectResponse
      * @throws FireflyException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function showLoginForm(Request $request)
     {
@@ -210,23 +212,12 @@ class LoginController extends Controller
 
         $count = DB::table('users')->count();
         $guard = config('auth.defaults.guard');
-        $title = (string)trans('firefly.login_page_title');
+        $title = (string) trans('firefly.login_page_title');
 
         if (0 === $count && 'web' === $guard) {
             return redirect(route('register'));
         }
 
-        // switch to LDAP settings:
-        if ('ldap' === $guard) {
-            Log::debug('User wishes to login using LDAP.');
-            $this->username = config('firefly.ldap_auth_field');
-        }
-
-        // throw warning if still using login_provider
-        $ldapWarning = false;
-        if ('ldap' === config('firefly.login_provider')) {
-            $ldapWarning = true;
-        }
         // is allowed to register, etc.
         $singleUserMode    = app('fireflyconfig')->get('single_user_mode', config('firefly.configuration.single_user_mode'))->data;
         $allowRegistration = true;
@@ -251,16 +242,6 @@ class LoginController extends Controller
         }
         $usernameField = $this->username();
 
-        return view('auth.login', compact('allowRegistration', 'email', 'remember', 'ldapWarning', 'allowReset', 'title', 'usernameField'));
-    }
-
-    /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
-    public function username()
-    {
-        return $this->username;
+        return view('auth.login', compact('allowRegistration', 'email', 'remember', 'allowReset', 'title', 'usernameField'));
     }
 }

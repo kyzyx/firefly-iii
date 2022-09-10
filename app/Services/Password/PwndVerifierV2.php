@@ -48,7 +48,7 @@ class PwndVerifierV2 implements Verifier
         $hash   = sha1($password);
         $prefix = substr($hash, 0, 5);
         $rest   = substr($hash, 5);
-        $uri    = sprintf('https://api.pwnedpasswords.com/range/%s', $prefix);
+        $url    = sprintf('https://api.pwnedpasswords.com/range/%s', $prefix);
         $opt    = [
             'headers' => [
                 'User-Agent'  => sprintf('Firefly III v%s', config('firefly.version')),
@@ -61,8 +61,8 @@ class PwndVerifierV2 implements Verifier
 
         try {
             $client = new Client();
-            $res    = $client->request('GET', $uri, $opt);
-        } catch (GuzzleException | RequestException $e) {
+            $res    = $client->request('GET', $url, $opt);
+        } catch (GuzzleException|RequestException $e) {
             Log::error(sprintf('Could not verify password security: %s', $e->getMessage()));
 
             return true;

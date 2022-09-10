@@ -125,17 +125,17 @@ class UserEventHandler
         // create a new group.
         while (true === $groupExists) {
             $groupExists = UserGroup::where('title', $groupTitle)->count() > 0;
-            if(false === $groupExists) {
+            if (false === $groupExists) {
                 $group = UserGroup::create(['title' => $groupTitle]);
                 break;
             }
             $groupTitle = sprintf('%s-%d', $user->email, $index);
             $index++;
-            if($index > 99) {
+            if ($index > 99) {
                 throw new FireflyException('Email address can no longer be used for registrations.');
             }
         }
-        $role  = UserRole::where('title', UserRole::OWNER)->first();
+        $role = UserRole::where('title', UserRole::OWNER)->first();
         if (null === $role) {
             throw new FireflyException('The user role is unexpectedly empty. Did you run all migrations?');
         }
@@ -226,14 +226,13 @@ class UserEventHandler
      */
     public function sendEmailChangeConfirmMail(UserChangedEmail $event): bool
     {
-        $newEmail  = $event->newEmail;
-        $oldEmail  = $event->oldEmail;
-        $user      = $event->user;
-        $ipAddress = $event->ipAddress;
-        $token     = app('preferences')->getForUser($user, 'email_change_confirm_token', 'invalid');
-        $uri       = route('profile.confirm-email-change', [$token->data]);
+        $newEmail = $event->newEmail;
+        $oldEmail = $event->oldEmail;
+        $user     = $event->user;
+        $token    = app('preferences')->getForUser($user, 'email_change_confirm_token', 'invalid');
+        $url      = route('profile.confirm-email-change', [$token->data]);
         try {
-            Mail::to($newEmail)->send(new ConfirmEmailChangeMail($newEmail, $oldEmail, $uri, $ipAddress));
+            Mail::to($newEmail)->send(new ConfirmEmailChangeMail($newEmail, $oldEmail, $url));
 
         } catch (Exception $e) { // @phpstan-ignore-line
             Log::error($e->getMessage());
@@ -252,15 +251,14 @@ class UserEventHandler
      */
     public function sendEmailChangeUndoMail(UserChangedEmail $event): bool
     {
-        $newEmail  = $event->newEmail;
-        $oldEmail  = $event->oldEmail;
-        $user      = $event->user;
-        $ipAddress = $event->ipAddress;
-        $token     = app('preferences')->getForUser($user, 'email_change_undo_token', 'invalid');
-        $hashed    = hash('sha256', sprintf('%s%s', (string)config('app.key'), $oldEmail));
-        $uri       = route('profile.undo-email-change', [$token->data, $hashed]);
+        $newEmail = $event->newEmail;
+        $oldEmail = $event->oldEmail;
+        $user     = $event->user;
+        $token    = app('preferences')->getForUser($user, 'email_change_undo_token', 'invalid');
+        $hashed   = hash('sha256', sprintf('%s%s', (string) config('app.key'), $oldEmail));
+        $url      = route('profile.undo-email-change', [$token->data, $hashed]);
         try {
-            Mail::to($oldEmail)->send(new UndoEmailChangeMail($newEmail, $oldEmail, $uri, $ipAddress));
+            Mail::to($oldEmail)->send(new UndoEmailChangeMail($newEmail, $oldEmail, $url));
 
         } catch (Exception $e) { // @phpstan-ignore-line
             Log::error($e->getMessage());
@@ -310,8 +308,7 @@ class UserEventHandler
         if ($sendMail) {
             // get the email address
             $email     = $event->user->email;
-            $uri       = route('index');
-            $ipAddress = $event->ipAddress;
+            $url       = route('index');
 
             // see if user has alternative email address:
             $pref = app('preferences')->getForUser($event->user, 'remote_guard_alt_email');
@@ -321,7 +318,7 @@ class UserEventHandler
 
             // send email.
             try {
-                Mail::to($email)->send(new RegisteredUserMail($uri, $ipAddress));
+                Mail::to($email)->send(new RegisteredUserMail($url));
 
             } catch (Exception $e) { // @phpstan-ignore-line
                 Log::error($e->getMessage());
@@ -334,13 +331,19 @@ class UserEventHandler
 
     /**
      * @param ActuallyLoggedIn $event
+     * @throws FireflyException
      */
     public function storeUserIPAddress(ActuallyLoggedIn $event): void
     {
         Log::debug('Now in storeUserIPAddress');
-        /** @var User $user */
         $user = $event->user;
         /** @var array $preference */
+
+        if($user->hasRole('demo')) {
+            Log::debug('Do not log demo user logins');
+            return;
+        }
+
         try {
             $preference = app('preferences')->getForUser($user, 'login_ip_history', [])->data;
         } catch (FireflyException $e) {

@@ -24,6 +24,15 @@ declare(strict_types=1);
 
 return [
     'home'                   => 'Hem',
+    'budgets'                => 'Budgetar',
+    'subscriptions'          => 'Prenumerationer',
+    'transactions'           => 'Transaktioner',
+    'title_expenses'         => 'Utgifter',
+    'title_withdrawal'       => 'Uttag',
+    'title_revenue'          => 'Intäkter / inkomst',
+    'title_deposit'          => 'Intäkter / inkomst',
+    'title_transfer'         => 'Överföringar',
+    'title_transfers'        => 'Överföringar',
     'edit_currency'          => 'Redigera valuta ":name"',
     'delete_currency'        => 'Ta bort valuta ":name"',
     'newPiggyBank'           => 'Skapa en ny spargris',
@@ -60,5 +69,10 @@ return [
     'delete_journal_link'    => 'Ta bort länken mellan transaktioner',
     'edit_object_group'      => 'Redigera grupp ":title"',
     'delete_object_group'    => 'Ta bort grupp ":title"',
-    'logout_others'          => 'Logga ut andra sessioner'
+    'logout_others'          => 'Logga ut andra sessioner',
+    'asset_accounts'         => 'Tillgångskonton',
+    'expense_accounts'       => 'Kostnadskonto',
+    'revenue_accounts'       => 'Intäktskonton',
+    'liabilities_accounts'   => 'Skulder',
+    'placeholder'            => 'Platshållare',
 ];

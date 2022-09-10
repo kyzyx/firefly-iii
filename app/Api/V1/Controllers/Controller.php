@@ -34,6 +34,8 @@ use Illuminate\Routing\Controller as BaseController;
 use League\Fractal\Manager;
 use League\Fractal\Serializer\JsonApiSerializer;
 use Log;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
@@ -71,9 +73,11 @@ abstract class Controller extends BaseController
     }
 
     /**
-     * Method to grab all parameters from the URI.
+     * Method to grab all parameters from the URL.
      *
      * @return ParameterBag
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     private function getParameters(): ParameterBag
     {
@@ -94,7 +98,7 @@ abstract class Controller extends BaseController
                     $obj = Carbon::parse($date);
                 } catch (InvalidDateException | InvalidFormatException $e) {
                     // don't care
-                    Log::error(sprintf('Invalid date exception in API controller: %s', $e->getMessage()));
+                    Log::warning(sprintf('Ignored invalid date "%s" in API controller parameter check: %s', $date, $e->getMessage()));
                 }
             }
             $bag->set($field, $obj);
@@ -144,7 +148,7 @@ abstract class Controller extends BaseController
 
 
     /**
-     * Method to help build URI's.
+     * Method to help build URL's.
      *
      * @return string
      */

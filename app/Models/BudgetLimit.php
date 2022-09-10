@@ -24,6 +24,7 @@ namespace FireflyIII\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -90,7 +91,7 @@ class BudgetLimit extends Model
     public static function routeBinder(string $value): BudgetLimit
     {
         if (auth()->check()) {
-            $budgetLimitId = (int)$value;
+            $budgetLimitId = (int) $value;
             $budgetLimit   = self::where('budget_limits.id', $budgetLimitId)
                                  ->leftJoin('budgets', 'budgets.id', '=', 'budget_limits.budget_id')
                                  ->where('budgets.user_id', auth()->user()->id)
@@ -118,5 +119,17 @@ class BudgetLimit extends Model
     public function transactionCurrency(): BelongsTo
     {
         return $this->belongsTo(TransactionCurrency::class);
+    }
+
+    /**
+     * Get the amount
+     *
+     * @return Attribute
+     */
+    protected function amount(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => (string) $value,
+        );
     }
 }

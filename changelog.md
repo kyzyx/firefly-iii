@@ -2,16 +2,169 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 5.7.11 - 2022-09-05
+
+### Added
+- [Issue 6254](https://github.com/firefly-iii/firefly-iii/issues/6254) Use Piggy Bank's start date in monthly suggestion by @rickdoesdev
+- Add best practices badge.
+- Various sanity checks on large amounts.
+
+### Removed
+- Service worker is removed.
+
+### Fixed
+- [Issue 6260](https://github.com/firefly-iii/firefly-iii/issues/6260)
+- [Issue 6271](https://github.com/firefly-iii/firefly-iii/issues/6271) Improve settings for Redis, by @canoine
+- [Issue 6283](https://github.com/firefly-iii/firefly-iii/issues/6283) Convert to deposit means the transaction loses its bill.
+- Fix issue with foreign currencies in transaction form.
+- Fix various issues with SQLite.
+- [Issue 6379](https://github.com/firefly-iii/firefly-iii/issues/6379) Some foreign currencies not list for setting on new transactions
+- Make 2FA code + validation more robust. Thanks to @jtmoss3991, @timaschew and @Ottega.
+
+## 5.7.10 - 2022-07-16
+
+### Fixed
+- [Issue 6122](https://github.com/firefly-iii/firefly-iii/issues/6122) Type error on data import and display
+- SQLite query issues fixed
+- Fix nullpointer.
+- [Issue 6168](https://github.com/firefly-iii/firefly-iii/issues/6168) Missing date overview in no-category list.
+- [Issue 6165](https://github.com/firefly-iii/firefly-iii/issues/6165) Account numbers could not be shared between expense and revenue accounts.
+- [Issue 6150](https://github.com/firefly-iii/firefly-iii/issues/6150) The first remote user would not get admin.
+- [Issue 6118](https://github.com/firefly-iii/firefly-iii/issues/6118) Piggy bank events would not get copied when transaction was copied.  
+
+### Security
+- Update packages
+
+## 5.7.9 - 2022-06-01
+
+### Fixed
+- Symfony 6.1 requires PHP 8.1, so back to 6.0 for the time being.
+
+## 5.7.8 - 2022-06-01
+
+### Fixed
+- Symfony 6.1 requires PHP 8.1, so back to 6.0 for the time being.
+
+## 5.7.7 - 2022-06-01
+
+### Fixed
+- Fixed an issue where the login form would overflow a database field.
+- [Issue 6113](https://github.com/firefly-iii/firefly-iii/issues/6113) Fix issue with number formatting.
+- [Issue 5996](https://github.com/firefly-iii/firefly-iii/issues/5996) Catch bad library
+
+### Added
+- @turrisxyz added a dependency review, thanks!
+
+## 5.7.6 - 2022-05-19
+
+### Fixed
+- [Issue 6058](https://github.com/firefly-iii/firefly-iii/issues/6058) Bad type-casting could break Firefly III on Home Assistant.
+- [Issue 6059](https://github.com/firefly-iii/firefly-iii/issues/6059) Fix issue with missing list of bills when creating a recurring transaction from a transaction.
+- Added missing DB integrity checks.
+
+### Security
+- Updated various packages
+
+## 5.7.5 - 2022-05-06
+
+### Fixed
+- Fixed an issue where missing method names would break the API.
+- [Issue 6040](https://github.com/firefly-iii/firefly-iii/issues/6040) Could not add or remove money from piggy banks without a target.
+- [Issue 6009](https://github.com/firefly-iii/firefly-iii/issues/6009) `has_no_attachments:true` would not return transactions with *deleted* transactions.
+- [Issue 6050](https://github.com/firefly-iii/firefly-iii/issues/6050) ja_JP is part of the Docker image
+
+## 5.7.4 - 2022-05-03
+
+### Fixed
+- Fixed issue in method names.
+
+## 5.7.3 - 2022-05-03
+
+### Fixed
+- Searching for `updated_at_before` and `created_at_before` works again.
+- [Issue 6000](https://github.com/firefly-iii/firefly-iii/issues/6000) Bad math when dealing with multi-currency reconciliation.
+- Remove unused CSS
+- Fix bad migration.
+
+### API
+- Add error code to error message.
+
+## 5.7.2 - 2022-04-13
+
+### Fixed
+- Not configuring email would break registration.
+- Extra validation on piggy bank amounts.
+
+## 5.7.1 - 2022-04-05
+
+### Fixed
+- Fixes an issue with showing piggy banks
+- [Issue 5961](https://github.com/firefly-iii/firefly-iii/issues/5961) Fixes an issue registering new users
+
+## 5.7.0 - 2022-04-04
+
+- ⚠️ This release no longer supports LDAP.
+- ⚠️ This is the last release that supports PHP 8.0
+- 👍 Want to try the new v3 layout? At your own risk, browse to `/v3/`.
+
+Please refer to the [documentation](https://docs.firefly-iii.org/firefly-iii/) and support channels if you run into problems:
+
+- [Gitter.im](https://gitter.im/firefly-iii/firefly-iii)
+- [Twitter](https://twitter.com/Firefly_III/)
+- [GitHub Issues](https://github.com/firefly-iii/firefly-iii/issues)
+- [GitHub Discussions](https://github.com/firefly-iii/firefly-iii/discussions)
+
+### Added
+- Error email message now includes HTTP headers.
+- [Issue 5373](https://github.com/firefly-iii/firefly-iii/issues/5373) You can give budgets notes, although they're not visible yet.
+- [Issue 5648](https://github.com/firefly-iii/firefly-iii/issues/5648) The Docker image supports custom locales, see `.env.example` for instructions.
+- [Issue 3984](https://github.com/firefly-iii/firefly-iii/issues/3984) [issue 5636](https://github.com/firefly-iii/firefly-iii/issues/5636) [issue 4903](https://github.com/firefly-iii/firefly-iii/issues/4903) [issue 5326](https://github.com/firefly-iii/firefly-iii/issues/5326) Lots of new search and rule operators. For the full list, see [search.php](https://github.com/firefly-iii/firefly-iii/blob/main/config/search.php) (a bit technical).
+- [Issue 5269](https://github.com/firefly-iii/firefly-iii/issues/5269) It's possible to add piggy banks that have no explicit target amount goal.
+- [Issue 4893](https://github.com/firefly-iii/firefly-iii/issues/4893) Bills can be given an end date and an extension date and will warn you about those dates.
+
+### Changed
+- [Issue 5757](https://github.com/firefly-iii/firefly-iii/issues/5757) Upgrade to Laravel 9.
+
+### Deprecated
+- [Issue 5911](https://github.com/firefly-iii/firefly-iii/issues/5911) Removed support for LDAP.
+
+### Fixed
+- [Issue 5810](https://github.com/firefly-iii/firefly-iii/issues/5810) Could not search for `no_notes:true` in some cases.
+- [Issue 5869](https://github.com/firefly-iii/firefly-iii/issues/5869) Converting transactions would sometimes fail.
+- [Issue 5870](https://github.com/firefly-iii/firefly-iii/issues/5870) Fixed broken link to instructions.
+- [Issue 5903](https://github.com/firefly-iii/firefly-iii/issues/5903) API budget limits was broken due to upgraded package.
+- [Issue 5852](https://github.com/firefly-iii/firefly-iii/issues/5852) It was not possible to recreate a currency.
+- [Issue 5882](https://github.com/firefly-iii/firefly-iii/issues/5882) `no_external_url:true` was broken.
+- [Issue 5770](https://github.com/firefly-iii/firefly-iii/issues/5770) Liabilities spent amount would be doubled.
+- [Issue 4013](https://github.com/firefly-iii/firefly-iii/issues/4013) Date in email message was not localized.
+- [Issue 5949](https://github.com/firefly-iii/firefly-iii/issues/5949) Deleting a transaction would sometimes send you back to a 404.
+
+## 5.6.16 - 2022-03-01
+
+### Fixed
+- Broken migration would clash during startup.
+
+## 5.6.15 - 2022-03-01
+
+### Changed
+- Meta field `external_uri` will be renamed properly.
+- Migrations are more robust.
+
+### Fixed
+- [Issue 5493](https://github.com/firefly-iii/firefly-iii/issues/5493) CSP is too strict in some cases
+- [Issue 5694](https://github.com/firefly-iii/firefly-iii/issues/5694) Adding attachment on some expenses causes them to disappear from transactions list
+- [Issue 5724](https://github.com/firefly-iii/firefly-iii/issues/5724) Filter `no_external_url` fixed.
+- [Issue 5806](https://github.com/firefly-iii/firefly-iii/issues/5806) Pagination on "all transactions without budget" was broken
+- [Issue 5810](https://github.com/firefly-iii/firefly-iii/issues/5810) Search query with `no_notes:true` breaks after editing transaction
+
+### API
+- Expanded the number of config fields you can pick up.
+- Rules also validate the number of active triggers or actions.
+
 ## 5.6.14 - 2022-02-06
 
 ### Added
 - Can now add daily bills
-
-### Changed
-- Initial release.
-
-### Deprecated
-- Initial release.
 
 ### Removed
 - Code related to the dynamic help text on GitHub
@@ -23,14 +176,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Install template was not working, thanks Softaculous!
 - Empty string in reports URL could lead to parse issues.
 
-### Security
-- Initial release.
-
 ### API
 - [Issue 5661](https://github.com/firefly-iii/firefly-iii/issues/5661) Various fields could not be set to NULL
 - [Issue 5670](https://github.com/firefly-iii/firefly-iii/issues/5670) Better date validation for rules
 - Various YAML updates to better reflect the API.
-
 
 ## 5.6.13 - 2022-01-29
 

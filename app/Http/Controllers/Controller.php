@@ -41,7 +41,7 @@ abstract class Controller extends BaseController
     protected string $dateTimeFormat;
     protected string $monthAndDayFormat;
     protected string $monthFormat;
-    protected string $redirectUri = '/';
+    protected string $redirectUrl = '/';
 
     /**
      * Controller constructor.
@@ -63,10 +63,10 @@ abstract class Controller extends BaseController
 
         // share custom auth guard info.
         $authGuard = config('firefly.authentication_guard');
-        $logoutUri = config('firefly.custom_logout_url');
+        $logoutUrl = config('firefly.custom_logout_url');
 
         app('view')->share('authGuard', $authGuard);
-        app('view')->share('logoutUri', $logoutUri);
+        app('view')->share('logoutUrl', $logoutUrl);
 
         // upload size
         $maxFileSize = app('steam')->phpBytes(ini_get('upload_max_filesize'));
@@ -92,9 +92,9 @@ abstract class Controller extends BaseController
             function ($request, $next): mixed {
                 $locale = app('steam')->getLocale();
                 // translations for specific strings:
-                $this->monthFormat       = (string)trans('config.month', [], $locale);
-                $this->monthAndDayFormat = (string)trans('config.month_and_day', [], $locale);
-                $this->dateTimeFormat    = (string)trans('config.date_time', [], $locale);
+                $this->monthFormat       = (string) trans('config.month_js', [], $locale);
+                $this->monthAndDayFormat = (string) trans('config.month_and_day_js', [], $locale);
+                $this->dateTimeFormat    = (string) trans('config.date_time_js', [], $locale);
 
                 // get shown-intro-preference:
                 if (auth()->check()) {

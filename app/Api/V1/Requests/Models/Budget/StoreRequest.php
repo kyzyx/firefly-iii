@@ -47,16 +47,17 @@ class StoreRequest extends FormRequest
     public function getAll(): array
     {
         $fields = [
-            'name'               => ['name', 'string'],
+            'name'               => ['name', 'convertString'],
             'active'             => ['active', 'boolean'],
             'order'              => ['active', 'integer'],
+            'notes'              => ['notes', 'convertString'],
 
             // auto budget currency:
             'currency_id'        => ['auto_budget_currency_id', 'integer'],
-            'currency_code'      => ['auto_budget_currency_code', 'string'],
-            'auto_budget_type'   => ['auto_budget_type', 'string'],
-            'auto_budget_amount' => ['auto_budget_amount', 'string'],
-            'auto_budget_period' => ['auto_budget_period', 'string'],
+            'currency_code'      => ['auto_budget_currency_code', 'convertString'],
+            'auto_budget_type'   => ['auto_budget_type', 'convertString'],
+            'auto_budget_amount' => ['auto_budget_amount', 'convertString'],
+            'auto_budget_period' => ['auto_budget_period', 'convertString'],
         ];
 
         return $this->getAllData($fields);
@@ -74,6 +75,7 @@ class StoreRequest extends FormRequest
             'active'             => [new IsBoolean],
             'currency_id'        => 'exists:transaction_currencies,id',
             'currency_code'      => 'exists:transaction_currencies,code',
+            'notes'              => 'nullable|between:1,65536',
             // auto budget info
             'auto_budget_type'   => 'in:reset,rollover,none',
             'auto_budget_amount' => 'numeric|min:0|max:1000000000|required_if:auto_budget_type,reset|required_if:auto_budget_type,rollover',

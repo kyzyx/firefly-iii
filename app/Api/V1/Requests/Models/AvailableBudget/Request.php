@@ -48,8 +48,8 @@ class Request extends FormRequest
         // this is the way:
         $fields = [
             'currency_id'   => ['currency_id', 'integer'],
-            'currency_code' => ['currency_code', 'string'],
-            'amount'        => ['amount', 'string'],
+            'currency_code' => ['currency_code', 'convertString'],
+            'amount'        => ['amount', 'convertString'],
             'start'         => ['start', 'date'],
             'end'           => ['end', 'date'],
         ];
@@ -90,7 +90,7 @@ class Request extends FormRequest
                     $start = new Carbon($data['start']);
                     $end   = new Carbon($data['end']);
                     if ($end->isBefore($start)) {
-                        $validator->errors()->add('end', (string)trans('validation.date_after'));
+                        $validator->errors()->add('end', (string) trans('validation.date_after'));
                     }
                 }
             }

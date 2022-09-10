@@ -36,10 +36,8 @@ use Log;
  */
 class TransactionGroupFactory
 {
-    /** @var TransactionJournalFactory */
-    private $journalFactory;
-    /** @var User The user */
-    private $user;
+    private TransactionJournalFactory $journalFactory;
+    private User $user;
 
     /**
      * TransactionGroupFactory constructor.
@@ -57,6 +55,7 @@ class TransactionGroupFactory
      * @return TransactionGroup
      * @throws DuplicateTransactionException
      * @throws FireflyException
+     * @throws \JsonException
      */
     public function create(array $data): TransactionGroup
     {

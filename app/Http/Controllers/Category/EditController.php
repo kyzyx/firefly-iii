@@ -54,7 +54,7 @@ class EditController extends Controller
 
         $this->middleware(
             function ($request, $next) {
-                app('view')->share('title', (string)trans('firefly.categories'));
+                app('view')->share('title', (string) trans('firefly.categories'));
                 app('view')->share('mainTitleIcon', 'fa-bookmark');
                 $this->repository  = app(CategoryRepositoryInterface::class);
                 $this->attachments = app(AttachmentHelperInterface::class);
@@ -74,11 +74,11 @@ class EditController extends Controller
      */
     public function edit(Request $request, Category $category)
     {
-        $subTitle = (string)trans('firefly.edit_category', ['name' => $category->name]);
+        $subTitle = (string) trans('firefly.edit_category', ['name' => $category->name]);
 
         // put previous url in session if not redirect from store (not "return_to_edit").
         if (true !== session('categories.edit.fromUpdate')) {
-            $this->rememberPreviousUri('categories.edit.uri');
+            $this->rememberPreviousUrl('categories.edit.url');
         }
         $request->session()->forget('categories.edit.fromUpdate');
 
@@ -102,7 +102,7 @@ class EditController extends Controller
         $data = $request->getCategoryData();
         $this->repository->update($category, $data);
 
-        $request->session()->flash('success', (string)trans('firefly.updated_category', ['name' => $category->name]));
+        $request->session()->flash('success', (string) trans('firefly.updated_category', ['name' => $category->name]));
         app('preferences')->mark();
 
         // store new attachment(s):
@@ -111,15 +111,15 @@ class EditController extends Controller
             $this->attachments->saveAttachmentsForModel($category, $files);
         }
         if (null !== $files && auth()->user()->hasRole('demo')) {
-            session()->flash('info', (string)trans('firefly.no_att_demo_user'));
+            session()->flash('info', (string) trans('firefly.no_att_demo_user'));
         }
 
         if (count($this->attachments->getMessages()->get('attachments')) > 0) {
             $request->session()->flash('info', $this->attachments->getMessages()->get('attachments'));
         }
-        $redirect = redirect($this->getPreviousUri('categories.edit.uri'));
+        $redirect = redirect($this->getPreviousUrl('categories.edit.url'));
 
-        if (1 === (int)$request->get('return_to_edit')) {
+        if (1 === (int) $request->get('return_to_edit')) {
 
             $request->session()->put('categories.edit.fromUpdate', true);
 

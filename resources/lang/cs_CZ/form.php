@@ -180,6 +180,8 @@ return [
     'blocked_code'                => 'Důvod blokování',
     'login_name'                  => 'Přihlašovací jméno',
     'is_owner'                    => 'Je správce?',
+    'url'                         => 'URL',
+    'bill_end_date'               => 'End date',
 
     // import
     'apply_rules'                 => 'Uplatnit pravidla',

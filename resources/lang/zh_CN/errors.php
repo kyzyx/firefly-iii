@@ -33,6 +33,7 @@ return [
     'be_right_back'           => '敬请期待！',
     'check_back'              => 'Firefly III 正在进行必要的维护，请稍后再试',
     'error_occurred'          => '很抱歉，出现错误',
+    'db_error_occurred'       => 'Whoops! A database error occurred.',
     'error_not_recoverable'   => '很遗憾，该错误无法恢复 :( Firefly III 已崩溃。错误信息：',
     'error'                   => '错误',
     'error_location'          => '该错误位于文件 <span style="font-family: monospace;">:file</span> 第 :line 行的代码 :code',
@@ -47,8 +48,8 @@ return [
     'tell_more'               => '请提交给我们更多信息，而不仅仅是“网页提示说很抱歉”。',
     'include_logs'            => '请包含错误日志（见上文）。',
     'what_did_you_do'         => '告诉我们您进行了哪些操作。',
-    'offline_header'          => 'You are probably offline',
-    'offline_unreachable'     => 'Firefly III is unreachable. Your device is currently offline or the server is not working.',
-    'offline_github'          => 'If you are sure both your device and the server are online, please open a ticket on <strong><a href="https://github.com/firefly-iii/firefly-iii/issues">GitHub</a></strong>.',
+    'offline_header'          => '您可能处于离线状态',
+    'offline_unreachable'     => '无法访问 Firefly III。您的设备目前处于离线状态或服务器无法正常工作。',
+    'offline_github'          => '如果您确信您的设备和服务器均正常在线运行，请在 <strong><a href="https://github.com/firefly-iii/firefly-iii/issues">GitHub</a></strong> 上创建工单。',
 
 ];

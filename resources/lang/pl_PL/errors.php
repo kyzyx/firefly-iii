@@ -33,6 +33,7 @@ return [
     'be_right_back'           => 'Zaraz wracam!',
     'check_back'              => 'Firefly III jest wyłączony na potrzeby wymaganej konserwacji. Sprawdź ponownie za sekundę.',
     'error_occurred'          => 'Ups! Wystąpił błąd.',
+    'db_error_occurred'       => 'Whoops! A database error occurred.',
     'error_not_recoverable'   => 'Niestety, nie mogliśmy się pozbierać po tym błędzie :(. Firefly III się popsuło. Błąd to:',
     'error'                   => 'Błąd',
     'error_location'          => 'Błąd wystąpił w pliku <span style="font-family: monospace;">:file</span> linia :line z kodem :code.',
@@ -47,8 +48,8 @@ return [
     'tell_more'               => 'Powiedz nam więcej niż "Nie działa!"',
     'include_logs'            => 'Dołącz dzienniki błędów (patrz powyżej).',
     'what_did_you_do'         => 'Powiedz nam, co robisz.',
-    'offline_header'          => 'You are probably offline',
-    'offline_unreachable'     => 'Firefly III is unreachable. Your device is currently offline or the server is not working.',
-    'offline_github'          => 'If you are sure both your device and the server are online, please open a ticket on <strong><a href="https://github.com/firefly-iii/firefly-iii/issues">GitHub</a></strong>.',
+    'offline_header'          => 'Prawdopodobnie jesteś offline',
+    'offline_unreachable'     => 'Firefly III jest nieosiągalny. Twoje urządzenie jest obecnie offline lub serwer nie działa.',
+    'offline_github'          => 'Jeśli jesteś pewien, że Twoje urządzenie i serwer są online, otwórz zgłoszenie na <strong><a href="https://github.com/firefly-iii/firefly-iii/issues">GitHub</a></strong>.',
 
 ];

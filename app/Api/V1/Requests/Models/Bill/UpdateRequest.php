@@ -47,21 +47,21 @@ class UpdateRequest extends FormRequest
     public function getAll(): array
     {
         $fields = [
-            'name'               => ['name', 'string'],
-            'amount_min'         => ['amount_min', 'string'],
-            'amount_max'         => ['amount_max', 'string'],
+            'name'               => ['name', 'convertString'],
+            'amount_min'         => ['amount_min', 'convertString'],
+            'amount_max'         => ['amount_max', 'convertString'],
             'currency_id'        => ['currency_id', 'integer'],
-            'currency_code'      => ['currency_code', 'string'],
+            'currency_code'      => ['currency_code', 'convertString'],
             'date'               => ['date', 'date'],
             'end_date'           => ['end_date', 'date'],
             'extension_date'     => ['extension_date', 'date'],
-            'repeat_freq'        => ['repeat_freq', 'string'],
+            'repeat_freq'        => ['repeat_freq', 'convertString'],
             'skip'               => ['skip', 'integer'],
             'active'             => ['active', 'boolean'],
             'order'              => ['order', 'integer'],
             'notes'              => ['notes', 'stringWithNewlines'],
             'object_group_id'    => ['object_group_id', 'integer'],
-            'object_group_title' => ['object_group_title', 'string'],
+            'object_group_title' => ['object_group_title', 'convertString'],
         ];
 
         return $this->getAllData($fields);
@@ -105,10 +105,10 @@ class UpdateRequest extends FormRequest
             static function (Validator $validator) {
                 $data = $validator->getData();
                 if (array_key_exists('amount_min', $data) && array_key_exists('amount_max', $data)) {
-                    $min = (float)($data['amount_min'] ?? 0);
-                    $max = (float)($data['amount_max'] ?? 0);
+                    $min = (float) ($data['amount_min'] ?? 0);
+                    $max = (float) ($data['amount_max'] ?? 0);
                     if ($min > $max) {
-                        $validator->errors()->add('amount_min', (string)trans('validation.amount_min_over_max'));
+                        $validator->errors()->add('amount_min', (string) trans('validation.amount_min_over_max'));
                     }
                 }
             }

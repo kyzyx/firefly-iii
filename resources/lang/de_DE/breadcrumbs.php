@@ -24,6 +24,15 @@ declare(strict_types=1);
 
 return [
     'home'                   => 'Startseite',
+    'budgets'                => 'Kostenrahmen',
+    'subscriptions'          => 'Abonnements',
+    'transactions'           => 'Buchungen',
+    'title_expenses'         => 'Ausgaben',
+    'title_withdrawal'       => 'Ausgaben',
+    'title_revenue'          => 'Einnahmen / Einkommen',
+    'title_deposit'          => 'Einnahmen / Einkommen',
+    'title_transfer'         => 'Umbuchungen',
+    'title_transfers'        => 'Umbuchungen',
     'edit_currency'          => 'Währung „:name” bearbeiten',
     'delete_currency'        => 'Währung „:name” löschen',
     'newPiggyBank'           => 'Neues Sparschwein erstellen',
@@ -60,5 +69,10 @@ return [
     'delete_journal_link'    => 'Transaktionsverknüpfung löschen',
     'edit_object_group'      => 'Gruppe „:title” bearbeiten',
     'delete_object_group'    => 'Gruppe „:title” löschen',
-    'logout_others'          => 'Alle anderen Sitzungen abmelden'
+    'logout_others'          => 'Alle anderen Sitzungen abmelden',
+    'asset_accounts'         => 'Bestandskonten',
+    'expense_accounts'       => 'Ausgabekonten',
+    'revenue_accounts'       => 'Einnahmenkonten',
+    'liabilities_accounts'   => 'Verbindlichkeiten',
+    'placeholder'            => '[Placeholder]',
 ];

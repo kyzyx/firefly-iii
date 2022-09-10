@@ -180,6 +180,8 @@ return [
     'blocked_code'                => 'Grund für Block',
     'login_name'                  => 'Login',
     'is_owner'                    => 'Ist Administrator?',
+    'url'                         => 'URL',
+    'bill_end_date'               => 'Endet am',
 
     // import
     'apply_rules'                 => 'Regeln anwenden',

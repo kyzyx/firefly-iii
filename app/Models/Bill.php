@@ -24,6 +24,7 @@ namespace FireflyIII\Models;
 
 use Eloquent;
 use FireflyIII\User;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -139,7 +140,7 @@ class Bill extends Model
     public static function routeBinder(string $value): Bill
     {
         if (auth()->check()) {
-            $billId = (int)$value;
+            $billId = (int) $value;
             /** @var User $user */
             $user = auth()->user();
             /** @var Bill $bill */
@@ -184,7 +185,7 @@ class Bill extends Model
      */
     public function setAmountMaxAttribute($value): void
     {
-        $this->attributes['amount_max'] = (string)$value;
+        $this->attributes['amount_max'] = (string) $value;
     }
 
     /**
@@ -194,7 +195,7 @@ class Bill extends Model
      */
     public function setAmountMinAttribute($value): void
     {
-        $this->attributes['amount_min'] = (string)$value;
+        $this->attributes['amount_min'] = (string) $value;
     }
 
     /**
@@ -222,5 +223,29 @@ class Bill extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the max amount
+     *
+     * @return Attribute
+     */
+    protected function amountMax(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => (string) $value,
+        );
+    }
+
+    /**
+     * Get the min amount
+     *
+     * @return Attribute
+     */
+    protected function amountMin(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => (string) $value,
+        );
     }
 }

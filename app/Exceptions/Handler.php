@@ -39,6 +39,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException as LaravelValidationException;
 use Laravel\Passport\Exceptions\OAuthServerException as LaravelOAuthException;
 use League\OAuth2\Server\Exception\OAuthServerException;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -62,6 +63,7 @@ class Handler extends ExceptionHandler
             LaravelOAuthException::class,
             TokenMismatchException::class,
             HttpException::class,
+            SuspiciousOperationException::class
         ];
 
     /**
@@ -153,6 +155,12 @@ class Handler extends ExceptionHandler
             $userData['id']    = auth()->user()->id;
             $userData['email'] = auth()->user()->email;
         }
+
+        $headers = [];
+        if (request()->headers) {
+            $headers = request()->headers->all();
+        }
+
         $data = [
             'class'        => get_class($e),
             'errorMessage' => $e->getMessage(),
@@ -165,11 +173,13 @@ class Handler extends ExceptionHandler
             'url'          => request()->fullUrl(),
             'userAgent'    => request()->userAgent(),
             'json'         => request()->acceptsJson(),
+            'method'       => request()->method(),
+            'headers'      => $headers,
         ];
 
         // create job that will mail.
         $ipAddress = request()->ip() ?? '0.0.0.0';
-        $job       = new MailError($userData, (string)config('firefly.site_owner'), $ipAddress, $data);
+        $job       = new MailError($userData, (string) config('firefly.site_owner'), $ipAddress, $data);
         dispatch($job);
 
         parent::report($e);

@@ -31,6 +31,15 @@ use Log;
 trait AppendsLocationData
 {
     /**
+     * Abstract method.
+     *
+     * @param $key
+     *
+     * @return bool
+     */
+    abstract public function has($key);
+
+    /**
      * Read the submitted Request data and add new or updated Location data to the array.
      *
      * @param array       $data
@@ -60,18 +69,18 @@ trait AppendsLocationData
         if ($isValidPOST) {
             Log::debug('Method is POST and all fields present and not NULL.');
             $data['store_location'] = true;
-            $data['longitude']      = $this->string($longitudeKey);
-            $data['latitude']       = $this->string($latitudeKey);
-            $data['zoom_level']     = $this->string($zoomLevelKey);
+            $data['longitude']      = $this->convertString($longitudeKey);
+            $data['latitude']       = $this->convertString($latitudeKey);
+            $data['zoom_level']     = $this->convertString($zoomLevelKey);
         }
 
         // for a PUT (api update) or POST update (UI)
         if ($isValidPUT) {
             Log::debug('Method is PUT and all fields present and not NULL.');
             $data['update_location'] = true;
-            $data['longitude']       = $this->string($longitudeKey);
-            $data['latitude']        = $this->string($latitudeKey);
-            $data['zoom_level']      = $this->string($zoomLevelKey);
+            $data['longitude']       = $this->convertString($longitudeKey);
+            $data['latitude']        = $this->convertString($latitudeKey);
+            $data['zoom_level']      = $this->convertString($zoomLevelKey);
         }
         if ($isValidEmptyPUT) {
             Log::debug('Method is PUT and all fields present and NULL.');
@@ -149,25 +158,6 @@ trait AppendsLocationData
     }
 
     /**
-     * Abstract method stolen from "InteractsWithInput".
-     *
-     * @param null $key
-     * @param bool $default
-     *
-     * @return mixed
-     */
-    abstract public function boolean($key = null, $default = false);
-
-    /**
-     * Abstract method.
-     *
-     * @param $key
-     *
-     * @return bool
-     */
-    abstract public function has($key);
-
-    /**
      * Abstract method.
      *
      * @return string
@@ -182,6 +172,16 @@ trait AppendsLocationData
      * @return mixed
      */
     abstract public function routeIs(...$patterns);
+
+    /**
+     * Abstract method stolen from "InteractsWithInput".
+     *
+     * @param null $key
+     * @param bool $default
+     *
+     * @return mixed
+     */
+    abstract public function boolean($key = null, $default = false);
 
     /**
      * @param string|null $prefix

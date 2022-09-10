@@ -24,6 +24,15 @@ declare(strict_types=1);
 
 return [
     'home'                   => 'Inicio',
+    'budgets'                => 'Orçamentos',
+    'subscriptions'          => 'Subscrições',
+    'transactions'           => 'Transações',
+    'title_expenses'         => 'Despesas',
+    'title_withdrawal'       => 'Despesas',
+    'title_revenue'          => 'Revenue / income',
+    'title_deposit'          => 'Revenue / income',
+    'title_transfer'         => 'Transferências',
+    'title_transfers'        => 'Transferências',
     'edit_currency'          => 'Editar moeda ":name"',
     'delete_currency'        => 'Apagar moeda ":name"',
     'newPiggyBank'           => 'Criar mealheiro',
@@ -48,8 +57,8 @@ return [
     'create_withdrawal'      => 'Novo levantamento',
     'create_deposit'         => 'Novo depósito',
     'create_transfer'        => 'Nova transferência',
-    'create_new_transaction' => 'Criar nova transacção',
-    'edit_journal'           => 'Alterar transacção ":description"',
+    'create_new_transaction' => 'Criar nova transação',
+    'edit_journal'           => 'Alterar transação ":description"',
     'edit_reconciliation'    => 'Editar ":description"',
     'delete_journal'         => 'Apagar transacção ":description"',
     'delete_group'           => 'Apagar transacção ":description"',
@@ -60,5 +69,10 @@ return [
     'delete_journal_link'    => 'Apagar ligação entre transações',
     'edit_object_group'      => 'Editar grupo ":title"',
     'delete_object_group'    => 'Apagar grupo ":title"',
-    'logout_others'          => 'Sair de outras sessões'
+    'logout_others'          => 'Sair de outras sessões',
+    'asset_accounts'         => 'Conta de activos',
+    'expense_accounts'       => 'Conta de despesas',
+    'revenue_accounts'       => 'Revenue accounts',
+    'liabilities_accounts'   => 'Liabilities',
+    'placeholder'            => '[Placeholder]',
 ];

@@ -29,24 +29,12 @@
 <body class="login-page">
 <div class="login-box">
     <div class="login-logo">
-        <b>Firefly</b>III<br />
+        <strong>Firefly</strong>III<br />
         <span style="font-family: monospace;font-size:16pt;">installation and upgrade</span>
     </div>
     {% block content %}{% endblock %}
 </div>
 <script src="v1/js/app.js?v={{ FF_VERSION }}" type="text/javascript" nonce="{{ JS_NONCE }}"></script>
 {% block scripts %}{% endblock %}
-
-<script nonce="{{ JS_NONCE }}">
-    // Initialize the service worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('serviceworker.js?v={{ FF_VERSION }}', {
-            scope: '{{ route('index') }}'
-        }).then(
-            () => console.log('ServiceWorker registration successful'),
-            (err) => console.log('ServiceWorker registration failed: ', err)
-        );
-    }
-</script>
 </body>
 </html>

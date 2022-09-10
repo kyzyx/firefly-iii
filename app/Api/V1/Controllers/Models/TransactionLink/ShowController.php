@@ -79,16 +79,16 @@ class ShowController extends Controller
     {
         // create some objects:
         $manager = $this->getManager();
-        // read type from URI
+        // read type from URL
         $name = $request->get('name');
 
         // types to get, page size:
-        $pageSize = (int)app('preferences')->getForUser(auth()->user(), 'listPageSize', 50)->data;
+        $pageSize = (int) app('preferences')->getForUser(auth()->user(), 'listPageSize', 50)->data;
         $linkType = $this->repository->findByName($name);
 
         // get list of transaction links. Count it and split it.
-        $collection = $this->repository->getJournalLinks($linkType);
-        $count = $collection->count();
+        $collection   = $this->repository->getJournalLinks($linkType);
+        $count        = $collection->count();
         $journalLinks = $collection->slice(($this->parameters->get('page') - 1) * $pageSize, $pageSize);
 
         // make paginator:

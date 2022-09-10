@@ -52,7 +52,7 @@ class EditController extends Controller
 
         $this->middleware(
             function ($request, $next) {
-                app('view')->share('title', (string)trans('firefly.rules'));
+                app('view')->share('title', (string) trans('firefly.rules'));
                 app('view')->share('mainTitleIcon', 'fa-random');
 
                 $this->repository = app(RuleGroupRepositoryInterface::class);
@@ -61,39 +61,6 @@ class EditController extends Controller
             }
         );
     }
-
-    /**
-     * Move a rule group in either direction.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function moveGroup(Request $request): JsonResponse
-    {
-        $groupId = (int)$request->get('id');
-        $ruleGroup= $this->repository->find($groupId);
-        if(null !== $ruleGroup) {
-            $direction = $request->get('direction');
-            if('down' === $direction) {
-                $maxOrder = $this->repository->maxOrder();
-                $order    = (int)$ruleGroup->order;
-                if ($order < $maxOrder) {
-                    $newOrder = $order + 1;
-                    $this->repository->setOrder($ruleGroup, $newOrder);
-                }
-            }
-            if('up' === $direction) {
-                $order = (int)$ruleGroup->order;
-                if ($order > 1) {
-                    $newOrder = $order - 1;
-                    $this->repository->setOrder($ruleGroup, $newOrder);
-                }
-            }
-        }
-        return new JsonResponse(['OK']);
-    }
-
 
     /**
      * Edit a rule group.
@@ -105,20 +72,52 @@ class EditController extends Controller
      */
     public function edit(Request $request, RuleGroup $ruleGroup)
     {
-        $subTitle = (string)trans('firefly.edit_rule_group', ['title' => $ruleGroup->title]);
+        $subTitle = (string) trans('firefly.edit_rule_group', ['title' => $ruleGroup->title]);
 
         $hasOldInput = null !== $request->old('_token');
         $preFilled   = [
-            'active' => $hasOldInput ? (bool)$request->old('active') : $ruleGroup->active,
+            'active' => $hasOldInput ? (bool) $request->old('active') : $ruleGroup->active,
         ];
         // put previous url in session if not redirect from store (not "return_to_edit").
         if (true !== session('rule-groups.edit.fromUpdate')) {
-            $this->rememberPreviousUri('rule-groups.edit.uri');
+            $this->rememberPreviousUrl('rule-groups.edit.url');
         }
         session()->forget('rule-groups.edit.fromUpdate');
         session()->flash('preFilled', $preFilled);
 
         return view('rules.rule-group.edit', compact('ruleGroup', 'subTitle'));
+    }
+
+    /**
+     * Move a rule group in either direction.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function moveGroup(Request $request): JsonResponse
+    {
+        $groupId   = (int) $request->get('id');
+        $ruleGroup = $this->repository->find($groupId);
+        if (null !== $ruleGroup) {
+            $direction = $request->get('direction');
+            if ('down' === $direction) {
+                $maxOrder = $this->repository->maxOrder();
+                $order    = (int) $ruleGroup->order;
+                if ($order < $maxOrder) {
+                    $newOrder = $order + 1;
+                    $this->repository->setOrder($ruleGroup, $newOrder);
+                }
+            }
+            if ('up' === $direction) {
+                $order = (int) $ruleGroup->order;
+                if ($order > 1) {
+                    $newOrder = $order - 1;
+                    $this->repository->setOrder($ruleGroup, $newOrder);
+                }
+            }
+        }
+        return new JsonResponse(['OK']);
     }
 
     /**
@@ -132,17 +131,17 @@ class EditController extends Controller
     public function update(RuleGroupFormRequest $request, RuleGroup $ruleGroup)
     {
         $data = [
-            'title'       => $request->string('title'),
+            'title'       => $request->convertString('title'),
             'description' => $request->stringWithNewlines('description'),
-            'active'      => 1 === (int)$request->input('active'),
+            'active'      => 1 === (int) $request->input('active'),
         ];
 
         $this->repository->update($ruleGroup, $data);
 
-        session()->flash('success', (string)trans('firefly.updated_rule_group', ['title' => $ruleGroup->title]));
+        session()->flash('success', (string) trans('firefly.updated_rule_group', ['title' => $ruleGroup->title]));
         app('preferences')->mark();
-        $redirect = redirect($this->getPreviousUri('rule-groups.edit.uri'));
-        if (1 === (int)$request->get('return_to_edit')) {
+        $redirect = redirect($this->getPreviousUrl('rule-groups.edit.url'));
+        if (1 === (int) $request->get('return_to_edit')) {
 
             session()->put('rule-groups.edit.fromUpdate', true);
 

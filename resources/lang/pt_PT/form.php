@@ -180,6 +180,8 @@ return [
     'blocked_code'                => 'Razao para o bloqueio',
     'login_name'                  => 'Iniciar sessao',
     'is_owner'                    => 'É administrador?',
+    'url'                         => 'URL',
+    'bill_end_date'               => 'Data final',
 
     // import
     'apply_rules'                 => 'Aplicar regras',

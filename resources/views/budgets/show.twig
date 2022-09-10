@@ -11,7 +11,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">
                         {% if budgetLimit %}
-                            {{ trans('firefly.chart_budget_in_period', {name: budget.name, start: budgetLimit.start_date.formatLocalized(monthAndDayFormat), end: budgetLimit.end_date.formatLocalized(monthAndDayFormat),currency: budgetLimit.transactionCurrency.name }) }}
+                            {{ trans('firefly.chart_budget_in_period', {name: budget.name, start: budgetLimit.start_date.isoFormat(monthAndDayFormat), end: budgetLimit.end_date.isoFormat(monthAndDayFormat),currency: budgetLimit.transactionCurrency.name }) }}
                         {% else %}
                             {{ trans('firefly.chart_all_journals_for_budget', {name:budget.name}) }}
                         {% endif %}
@@ -147,8 +147,8 @@
                     <div class="box-header with-border">
                         <h3 class="box-title"><a
                                     href="{{ route('budgets.show.limit',[budget.id,limit.id]) }}">
-                                {{ limit.start_date.formatLocalized(monthAndDayFormat) }} &mdash;
-                                {{ limit.end_date.formatLocalized(monthAndDayFormat) }}
+                                {{ limit.start_date.isoFormat(monthAndDayFormat) }} &mdash;
+                                {{ limit.end_date.isoFormat(monthAndDayFormat) }}
                             </a>
                         </h3>
                     </div>
@@ -207,16 +207,16 @@
         var budgetLimitID = 0;
         {% if budgetLimit.id %}
             budgetLimitID = {{ budgetLimit.id }};
-            var budgetChartUri = '{{ route('chart.budget.budget-limit', [budget.id, budgetLimit.id] ) }}';
+            var budgetChartUrl = '{{ route('chart.budget.budget-limit', [budget.id, budgetLimit.id] ) }}';
             var currencySymbol = '{{ budgetLimit.transactionCurrency.symbol }}';
-            var expenseCategoryUri = '{{ route('chart.budget.expense-category', [budget.id, budgetLimit.id]) }}';
-            var expenseAssetUri = '{{ route('chart.budget.expense-asset', [budget.id, budgetLimit.id]) }}';
-            var expenseExpenseUri = '{{ route('chart.budget.expense-expense', [budget.id, budgetLimit.id]) }}';
+            var expenseCategoryUrl = '{{ route('chart.budget.expense-category', [budget.id, budgetLimit.id]) }}';
+            var expenseAssetUrl = '{{ route('chart.budget.expense-asset', [budget.id, budgetLimit.id]) }}';
+            var expenseExpenseUrl = '{{ route('chart.budget.expense-expense', [budget.id, budgetLimit.id]) }}';
         {% else %}
-            var budgetChartUri = '{{ route('chart.budget.budget', [budget.id] ) }}';
-            var expenseCategoryUri = '{{ route('chart.budget.expense-category', [budget.id]) }}';
-            var expenseAssetUri = '{{ route('chart.budget.expense-asset', [budget.id]) }}';
-            var expenseExpenseUri = '{{ route('chart.budget.expense-expense', [budget.id]) }}';
+            var budgetChartUrl = '{{ route('chart.budget.budget', [budget.id] ) }}';
+            var expenseCategoryUrl = '{{ route('chart.budget.expense-category', [budget.id]) }}';
+            var expenseAssetUrl = '{{ route('chart.budget.expense-asset', [budget.id]) }}';
+            var expenseExpenseUrl = '{{ route('chart.budget.expense-expense', [budget.id]) }}';
         {% endif %}
     </script>
 

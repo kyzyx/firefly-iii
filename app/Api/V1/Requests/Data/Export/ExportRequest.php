@@ -43,15 +43,15 @@ class ExportRequest extends FormRequest
         $result     = [
             'start' => $this->getCarbonDate('start') ?? Carbon::now()->subYear(),
             'end'   => $this->getCarbonDate('end') ?? Carbon::now(),
-            'type'  => $this->string('type'),
+            'type'  => $this->convertString('type'),
         ];
-        $parts      = explode(',', $this->string('accounts'));
+        $parts      = explode(',', $this->convertString('accounts'));
         $repository = app(AccountRepositoryInterface::class);
         $repository->setUser(auth()->user());
 
         $accounts = new Collection;
         foreach ($parts as $part) {
-            $accountId = (int)$part;
+            $accountId = (int) $part;
             if (0 !== $accountId) {
                 $account = $repository->find($accountId);
                 if (null !== $account && AccountType::ASSET === $account->accountType->type) {

@@ -13,7 +13,7 @@
                     <h3 class="box-title">
                         {{ trans('firefly.chart_account_in_period', {
                             balance: formatAmountBySymbol(balance, currency.symbol, currency.decimal_places, true),
-                            name: account.name|escape, start: start.formatLocalized(monthAndDayFormat), end: end.formatLocalized(monthAndDayFormat) })|raw }}
+                            name: account.name|escape, start: start.isoFormat(monthAndDayFormat), end: end.isoFormat(monthAndDayFormat) })|raw }}
                     </h3>
                     <div class="box-tools pull-right">
                         <div class="btn-group">
@@ -182,18 +182,18 @@
         var showAll = true;
         currencySymbol = "{{ currency.symbol }}";
         var accountID = {{ account.id }};
-        var chartUri = '{{ chartUri }}';
+        var chartUrl = '{{ chartUrl }}';
         {% if not showAll %}
         showAll = false;
-        // uri's for charts:
+        // url's for charts:
 
-        var incomeCategoryUri = '{{ route('chart.account.income-category', [account.id, start.format('Ymd'), end.format('Ymd')]) }}';
-        var expenseCategoryUri = '{{ route('chart.account.expense-category', [account.id, start.format('Ymd'), end.format('Ymd')]) }}';
-        var expenseBudgetUri = '{{ route('chart.account.expense-budget', [account.id, start.format('Ymd'), end.format('Ymd')]) }}';
+        var incomeCategoryUrl = '{{ route('chart.account.income-category', [account.id, start.format('Ymd'), end.format('Ymd')]) }}';
+        var expenseCategoryUrl = '{{ route('chart.account.expense-category', [account.id, start.format('Ymd'), end.format('Ymd')]) }}';
+        var expenseBudgetUrl = '{{ route('chart.account.expense-budget', [account.id, start.format('Ymd'), end.format('Ymd')]) }}';
         var drawVerticalLine = '';
         {# render vertical line with text "today"  #}
         {% if start.lte(today) and end.gte(today) %}
-        drawVerticalLine = '{{ today.formatLocalized(monthAndDayFormat) }}';
+        drawVerticalLine = '{{ today.isoFormat(monthAndDayFormat) }}';
         {% endif %}
         {% endif %}
 

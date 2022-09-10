@@ -49,7 +49,7 @@ class EditController extends Controller
         $this->middleware(
             static function ($request, $next) {
 
-                app('view')->share('title', (string)trans('firefly.transactions'));
+                app('view')->share('title', (string) trans('firefly.transactions'));
                 app('view')->share('mainTitleIcon', 'fa-exchange');
 
                 return $next($request);
@@ -71,16 +71,16 @@ class EditController extends Controller
         }
 
         /** @var AccountRepositoryInterface $repository */
-        $repository = app(AccountRepositoryInterface::class);
+        $repository           = app(AccountRepositoryInterface::class);
         $allowedOpposingTypes = config('firefly.allowed_opposing_types');
-        $accountToTypes = config('firefly.account_to_transaction');
-        $expectedSourceTypes = config('firefly.expected_source_types');
-        $allowedSourceDests = config('firefly.source_dests');
+        $accountToTypes       = config('firefly.account_to_transaction');
+        $expectedSourceTypes  = config('firefly.expected_source_types');
+        $allowedSourceDests   = config('firefly.source_dests');
         //
 
         $defaultCurrency = app('amount')->getDefaultCurrency();
         $cash            = $repository->getCashAccount();
-        $previousUrl     = $this->rememberPreviousUri('transactions.edit.uri');
+        $previousUrl     = $this->rememberPreviousUrl('transactions.edit.url');
         $parts           = parse_url($previousUrl);
         $search          = sprintf('?%s', $parts['query'] ?? '');
         $previousUrl     = str_replace($search, '', $previousUrl);

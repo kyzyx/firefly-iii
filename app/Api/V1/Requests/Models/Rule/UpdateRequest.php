@@ -46,10 +46,10 @@ class UpdateRequest extends FormRequest
     public function getAll(): array
     {
         $fields = [
-            'title'           => ['title', 'string'],
+            'title'           => ['title', 'convertString'],
             'description'     => ['description', 'stringWithNewlines'],
             'rule_group_id'   => ['rule_group_id', 'integer'],
-            'trigger'         => ['trigger', 'string'],
+            'trigger'         => ['trigger', 'convertString'],
             'strict'          => ['strict', 'boolean'],
             'stop_processing' => ['stop_processing', 'boolean'],
             'active'          => ['active', 'boolean'],
@@ -110,8 +110,8 @@ class UpdateRequest extends FormRequest
                 $return[] = [
                     'type'            => $action['type'],
                     'value'           => $action['value'],
-                    'active'          => $this->convertBoolean((string)($action['active'] ?? 'false')),
-                    'stop_processing' => $this->convertBoolean((string)($action['stop_processing'] ?? 'false')),
+                    'active'          => $this->convertBoolean((string) ($action['active'] ?? 'false')),
+                    'stop_processing' => $this->convertBoolean((string) ($action['stop_processing'] ?? 'false')),
                 ];
             }
         }
@@ -167,7 +167,9 @@ class UpdateRequest extends FormRequest
         $validator->after(
             function (Validator $validator) {
                 $this->atLeastOneTrigger($validator);
+                $this->atLeastOneValidTrigger($validator);
                 $this->atLeastOneAction($validator);
+                $this->atLeastOneValidAction($validator);
             }
         );
     }
@@ -183,7 +185,36 @@ class UpdateRequest extends FormRequest
         $triggers = $data['triggers'] ?? null;
         // need at least one trigger
         if (is_array($triggers) && empty($triggers)) {
-            $validator->errors()->add('title', (string)trans('validation.at_least_one_trigger'));
+            $validator->errors()->add('title', (string) trans('validation.at_least_one_trigger'));
+        }
+    }
+
+    /**
+     * Adds an error to the validator when there are no repetitions in the array of data.
+     *
+     * @param Validator $validator
+     */
+    protected function atLeastOneValidTrigger(Validator $validator): void
+    {
+        $data          = $validator->getData();
+        $triggers      = $data['triggers'] ?? [];
+        $allInactive   = true;
+        $inactiveIndex = 0;
+        // need at least one trigger
+        if (is_array($triggers) && empty($triggers)) {
+            return;
+        }
+        foreach ($triggers as $index => $trigger) {
+            $active = array_key_exists('active', $trigger) ? $trigger['active'] : true; // assume true
+            if (true === $active) {
+                $allInactive = false;
+            }
+            if (false === $active) {
+                $inactiveIndex = $index;
+            }
+        }
+        if (true === $allInactive) {
+            $validator->errors()->add(sprintf('triggers.%d.active', $inactiveIndex), (string) trans('validation.at_least_one_active_trigger'));
         }
     }
 
@@ -198,7 +229,37 @@ class UpdateRequest extends FormRequest
         $actions = $data['actions'] ?? null;
         // need at least one action
         if (is_array($actions) && empty($actions)) {
-            $validator->errors()->add('title', (string)trans('validation.at_least_one_action'));
+            $validator->errors()->add('title', (string) trans('validation.at_least_one_action'));
+        }
+    }
+
+    /**
+     * Adds an error to the validator when there are no repetitions in the array of data.
+     *
+     * @param Validator $validator
+     */
+    protected function atLeastOneValidAction(Validator $validator): void
+    {
+        $data          = $validator->getData();
+        $actions       = $data['actions'] ?? [];
+        $allInactive   = true;
+        $inactiveIndex = 0;
+        // need at least one action
+        if (is_array($actions) && empty($actions)) {
+            return;
+        }
+
+        foreach ($actions as $index => $action) {
+            $active = array_key_exists('active', $action) ? $action['active'] : true; // assume true
+            if (true === $active) {
+                $allInactive = false;
+            }
+            if (false === $active) {
+                $inactiveIndex = $index;
+            }
+        }
+        if (true === $allInactive) {
+            $validator->errors()->add(sprintf('actions.%d.active', $inactiveIndex), (string) trans('validation.at_least_one_active_action'));
         }
     }
 }
