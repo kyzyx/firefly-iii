@@ -110,7 +110,7 @@ trait GetConfigurationData
 	$today = today(config('app.timezone'));
 
         $month = '1M';
-        $quarter = '1Q';
+        $quarter = '3M';
 	$year = '1Y';
 
 	// current month
