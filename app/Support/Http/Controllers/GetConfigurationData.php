@@ -106,7 +106,8 @@ trait GetConfigurationData
             $title => [$start, $end],
         ];
 
-	$today    = Carbon::now();
+	$today = Carbon::now();
+	today(config('app.timezone'));
 
         $month = '1M';
         $quarter = '1Q';
