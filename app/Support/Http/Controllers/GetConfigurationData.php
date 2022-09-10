@@ -106,11 +106,11 @@ trait GetConfigurationData
             $title => [$start, $end],
         ];
 
-	$today    = today(config('app.timezone'));
+	$today    = Carbon::now();
 
-        $month = (string) app('preferences')->get('viewRange', '1M')->data;
-        $quarter = (string) app('preferences')->get('viewRange', '3M')->data;
-	$year           = (string) app('preferences')->get('viewRange', '1M')->data;
+        $month = '1M';
+        $quarter = '1Q';
+	$year = '1Y';
 
 	// current month
 	$rangestart = app('navigation')->startOfPeriod($today, $month);
