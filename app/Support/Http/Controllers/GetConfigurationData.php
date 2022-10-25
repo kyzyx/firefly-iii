@@ -124,7 +124,7 @@ trait GetConfigurationData
 
 	// current year
 	$rangestart = app('navigation')->startOfPeriod($today, $year);
-	$rangeend   = app('navigation')->endOfPeriod($today, $year);
+	$rangeend   = app('navigation')->endOfPeriod($rangestart, $year);
 	$index      = app('navigation')->periodShow($rangestart, $year);
 	$ranges[$index] = [$rangestart, $rangeend];
 
