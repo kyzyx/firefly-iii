@@ -25,6 +25,7 @@ namespace FireflyIII\Providers;
 use Exception;
 use FireflyIII\Events\ActuallyLoggedIn;
 use FireflyIII\Events\AdminRequestedTestMessage;
+use FireflyIII\Events\ChangedPiggyBankAmount;
 use FireflyIII\Events\DestroyedTransactionGroup;
 use FireflyIII\Events\DetectedNewIPAddress;
 use FireflyIII\Events\RegisteredUser;
@@ -49,6 +50,7 @@ use Laravel\Passport\Events\AccessTokenCreated;
 use Log;
 use Mail;
 use Session;
+use TypeError;
 
 /**
  * Class EventServiceProvider.
@@ -139,6 +141,11 @@ class EventServiceProvider extends ServiceProvider
             WarnUserAboutBill::class            => [
                 'FireflyIII\Handlers\Events\BillEventHandler@warnAboutBill',
             ],
+
+            // piggy bank related events:
+            ChangedPiggyBankAmount::class => [
+                'FireflyIII\Handlers\Events\PiggyBankEventHandler@changePiggyAmount',
+            ],
         ];
 
     /**
@@ -189,7 +196,7 @@ class EventServiceProvider extends ServiceProvider
                 try {
                     Log::debug('Trying to send message...');
                     Mail::to($email)->send(new OAuthTokenCreatedMail($oauthClient));
-                } catch (Exception $e) { // @phpstan-ignore-line
+                } catch (TypeError|Exception $e) { // @phpstan-ignore-line
                     Log::debug('Send message failed! :(');
                     Log::error($e->getMessage());
                     Log::error($e->getTraceAsString());

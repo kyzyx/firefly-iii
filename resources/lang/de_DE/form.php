@@ -125,6 +125,7 @@ return [
     'start'                       => 'Anfang des Bereichs',
     'end'                         => 'Ende des Bereichs',
     'delete_account'              => 'Konto „:name” löschen',
+    'delete_webhook'              => 'Webhook ":title" löschen',
     'delete_bill'                 => 'Rechnung „:name” löschen',
     'delete_budget'               => 'Budget „:name” löschen',
     'delete_category'             => 'Kategorie „:name” löschen',
@@ -145,6 +146,7 @@ return [
     'object_group_areYouSure'     => 'Möchten Sie die Gruppe „:title” wirklich löschen?',
     'ruleGroup_areYouSure'        => 'Sind Sie sicher, dass sie die Regelgruppe ":title" löschen möchten?',
     'budget_areYouSure'           => 'Möchten Sie das Budget „:name” wirklich löschen?',
+    'webhook_areYouSure'           => 'Sind Sie sicher, dass Sie den Webhook mit dem Namen ":title" löschen möchten?',
     'category_areYouSure'         => 'Möchten Sie die Kategorie „:name” wirklich löschen?',
     'recurring_areYouSure'        => 'Möchten Sie den Dauerauftrag „:title” wirklich löschen?',
     'currency_areYouSure'         => 'Möchten Sie die Währung „:name” wirklich löschen?',
@@ -246,4 +248,7 @@ return [
     'submitted'                   => 'Übermittelt',
     'key'                         => 'Schlüssel',
     'value'                       => 'Inhalt der Aufzeichnungen',
+    'webhook_delivery'            => 'Zustellung',
+    'webhook_response'            => 'Antwort',
+    'webhook_trigger'             => 'Auslöser',
 ];

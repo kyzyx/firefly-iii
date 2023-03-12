@@ -35,6 +35,8 @@ return [
     'last_seven_days'                      => 'Last seven days',
     'last_thirty_days'                     => 'Last thirty days',
     'last_180_days'                        => 'Last 180 days',
+    'month_to_date'                        => 'Month to date',
+    'year_to_date'                         => 'Year to date',
     'YTD'                                  => 'YTD',
     'welcome_back'                         => 'What\'s playing?',
     'everything'                           => 'Everything',
@@ -499,6 +501,7 @@ return [
     'search_modifier_attachment_notes_contains'           => 'Any attachment\'s notes contain ":value"',
     'search_modifier_attachment_notes_starts'             => 'Any attachment\'s notes start with ":value"',
     'search_modifier_attachment_notes_ends'               => 'Any attachment\'s notes end is ":value"',
+    'search_modifier_sepa_ct_is'                          => 'SEPA CT is ":value"',
     'update_rule_from_query'                              => 'Update rule ":rule" from search query',
     'create_rule_from_query'                              => 'Create new rule from search query',
     'rule_from_search_words'                              => 'The rule engine has a hard time handling ":string". The suggested rule that fits your search query may give different results. Please verify the rule triggers carefully.',
@@ -721,6 +724,8 @@ return [
     'rule_trigger_no_external_url_choice'                 => 'Transaction has no external URL',
     'rule_trigger_id_choice'                              => 'Transaction ID is..',
     'rule_trigger_id'                                     => 'Transaction ID is ":trigger_value"',
+    'rule_trigger_sepa_ct_is_choice'                      => 'SEPA CT is..',
+    'rule_trigger_sepa_ct_is'                             => 'SEPA CT is ":trigger_value"',
 
     // new values:
     'rule_trigger_user_action_choice'                     => 'User action is ":trigger_value"',
@@ -1846,6 +1851,7 @@ return [
     'no_tags'                                   => '(no tags)',
 
     // piggy banks:
+    'event_history'                             => 'Event history',
     'add_money_to_piggy'                        => 'Add money to piggy bank ":name"',
     'piggy_bank'                                => 'Piggy bank',
     'new_piggy_bank'                            => 'New piggy bank',

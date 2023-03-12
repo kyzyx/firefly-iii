@@ -125,6 +125,7 @@ return [
     'start'                       => 'Início do intervalo',
     'end'                         => 'Término do intervalo',
     'delete_account'              => 'Apagar conta ":name"',
+    'delete_webhook'              => 'Excluir webhook ":title"',
     'delete_bill'                 => 'Apagar fatura ":name"',
     'delete_budget'               => 'Excluir o orçamento ":name"',
     'delete_category'             => 'Excluir categoria ":name"',
@@ -145,6 +146,7 @@ return [
     'object_group_areYouSure'     => 'Você tem certeza que deseja excluir a regra intitulada ":title"?',
     'ruleGroup_areYouSure'        => 'Tem certeza que deseja excluir o grupo de regras intitulado ":title"?',
     'budget_areYouSure'           => 'Tem certeza que deseja excluir o orçamento chamado ":name"?',
+    'webhook_areYouSure'           => 'Você tem certeza que quer excluir o webhook chamado ":title"?',
     'category_areYouSure'         => 'Tem certeza que deseja excluir a categoria com o nome ":name"?',
     'recurring_areYouSure'        => 'Tem certeza que deseja excluir o grupo de regras intitulado ":title"?',
     'currency_areYouSure'         => 'Tem certeza que deseja excluir a moeda chamada ":name"?',
@@ -246,4 +248,7 @@ return [
     'submitted'                   => 'Enviado',
     'key'                         => 'Chave',
     'value'                       => 'Conteúdo do registro',
+    'webhook_delivery'            => 'Entrega',
+    'webhook_response'            => 'Resposta',
+    'webhook_trigger'             => 'Gatilho',
 ];

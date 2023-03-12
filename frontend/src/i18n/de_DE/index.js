@@ -1,3 +1,23 @@
+/*
+ * index.js
+ * Copyright (c) 2022 james@firefly-iii.org
+ *
+ * This file is part of Firefly III (https://github.com/firefly-iii).
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 export default {
     "config": {
         "html_language": "de",
@@ -49,6 +69,9 @@ export default {
         "new_budget": "Neues Budget",
         "new_asset_account": "Neues Bestandskonto",
         "newTransfer": "Neue Umbuchung",
+        "submission_options": "Submission options",
+        "apply_rules_checkbox": "Apply rules",
+        "fire_webhooks_checkbox": "Fire webhooks",
         "newDeposit": "Neue Einnahme",
         "newWithdrawal": "Neue Ausgabe",
         "bills_paid": "Rechnungen bezahlt",
@@ -57,13 +80,13 @@ export default {
         "budgeted": "Vorgesehen",
         "spent": "Ausgegeben",
         "no_bill": "(keine Belege)",
-        "rule_trigger_source_account_starts_choice": "Name des Quellkontos beginnt mit..",
+        "rule_trigger_source_account_starts_choice": "Quellkonto-Name beginnt mit..",
         "rule_trigger_source_account_ends_choice": "Quellkonto-Name endet mit..",
         "rule_trigger_source_account_is_choice": "Quellkonto-Name lautet..",
         "rule_trigger_source_account_contains_choice": "Quellkonto-Name enh\u00e4lt..",
         "rule_trigger_account_id_choice": "Beide Konto IDs sind exakt..",
-        "rule_trigger_source_account_id_choice": "Quellkonto ID ist genau..",
-        "rule_trigger_destination_account_id_choice": "Zielkonto ID ist genau..",
+        "rule_trigger_source_account_id_choice": "Quellkonto-ID ist genau..",
+        "rule_trigger_destination_account_id_choice": "Zielkonto-ID ist genau..",
         "rule_trigger_account_is_cash_choice": "Beide Konten sind Bargeld",
         "rule_trigger_source_is_cash_choice": "Quellkonto ist (bar)",
         "rule_trigger_destination_is_cash_choice": "Zielkonto ist (bar)",
@@ -77,8 +100,8 @@ export default {
         "rule_trigger_destination_account_contains_choice": "Zielkonto-Name enth\u00e4lt..",
         "rule_trigger_destination_account_nr_starts_choice": "Zielkontonummer\/IBAN beginnt mit..",
         "rule_trigger_destination_account_nr_ends_choice": "Zielkontonummer\/IBAN endet auf..",
-        "rule_trigger_destination_account_nr_is_choice": "Zielkontonummer\/IBAN ist..",
-        "rule_trigger_destination_account_nr_contains_choice": "Zielkontonummer\/IBAN enth\u00e4lt..",
+        "rule_trigger_destination_account_nr_is_choice": "Zielkontonummer \/ IBAN ist..",
+        "rule_trigger_destination_account_nr_contains_choice": "Zielkontonummer \/ IBAN enth\u00e4lt..",
         "rule_trigger_transaction_type_choice": "Buchung ist vom Typ..",
         "rule_trigger_category_is_choice": "Kategorie ist..",
         "rule_trigger_amount_less_choice": "Betrag ist geringer als..",
@@ -119,24 +142,24 @@ export default {
         "rule_trigger_any_external_url_choice": "Buchung hat eine externe URL",
         "rule_trigger_no_external_url_choice": "Buchung hat keine externe URL",
         "rule_trigger_id_choice": "Buchungskennung lautet \u2026",
-        "rule_action_delete_transaction_choice": "Buchung l\u00f6schen (!)",
-        "rule_action_set_category_choice": "Kategorie festlegen..",
+        "rule_action_delete_transaction_choice": "Buchung L\u00d6SCHEN(!)",
+        "rule_action_set_category_choice": "Kategorie zuweisen\u00a0...",
         "rule_action_clear_category_choice": "Bereinige jede Kategorie",
-        "rule_action_set_budget_choice": "Budget festlegen..",
+        "rule_action_set_budget_choice": "Setze Budget auf ..",
         "rule_action_clear_budget_choice": "Alle Budgets leeren",
         "rule_action_add_tag_choice": "Schlagwort hinzuf\u00fcgen \u2026",
         "rule_action_remove_tag_choice": "Schlagwort entfernen \u2026",
         "rule_action_remove_all_tags_choice": "Alle Schlagw\u00f6rter entfernen",
-        "rule_action_set_description_choice": "Beschreibung festlegen auf..",
-        "rule_action_update_piggy_choice": "Buchungsbetrag im Sparschwein hinzuf\u00fcgen\/entfernen \u2026",
-        "rule_action_append_description_choice": "An Beschreibung anh\u00e4ngen..",
-        "rule_action_prepend_description_choice": "Vor Beschreibung voranstellen..",
-        "rule_action_set_source_account_choice": "Quellkonto festlegen auf \u2026",
-        "rule_action_set_destination_account_choice": "Zielkonto festlegen auf \u2026",
-        "rule_action_append_notes_choice": "An Notizen anh\u00e4ngen..",
-        "rule_action_prepend_notes_choice": "Vor Notizen voranstellen..",
+        "rule_action_set_description_choice": "Beschreibung festlegen auf \u2026",
+        "rule_action_update_piggy_choice": "Add \/ remove transaction amount in piggy bank ..",
+        "rule_action_append_description_choice": "Append description with ..",
+        "rule_action_prepend_description_choice": "Prepend description with ..",
+        "rule_action_set_source_account_choice": "Quellkonto festlegen auf ..",
+        "rule_action_set_destination_account_choice": "Zielkonto festlegen auf ..",
+        "rule_action_append_notes_choice": "Append notes with ..",
+        "rule_action_prepend_notes_choice": "Prepend notes with ..",
         "rule_action_clear_notes_choice": "Alle Notizen entfernen",
-        "rule_action_set_notes_choice": "Notizen festlegen auf..",
+        "rule_action_set_notes_choice": "Setze Notizen auf ..",
         "rule_action_link_to_bill_choice": "Mit einer Rechnung verkn\u00fcpfen..",
         "rule_action_convert_deposit_choice": "Buchung in eine Einzahlung umwandeln",
         "rule_action_convert_withdrawal_choice": "Buchung in eine Ausgabe umwandeln",

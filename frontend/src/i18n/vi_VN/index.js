@@ -1,3 +1,23 @@
+/*
+ * index.js
+ * Copyright (c) 2022 james@firefly-iii.org
+ *
+ * This file is part of Firefly III (https://github.com/firefly-iii).
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 export default {
     "config": {
         "html_language": "vi",
@@ -49,6 +69,9 @@ export default {
         "new_budget": "Ng\u00e2n s\u00e1ch m\u1edbi",
         "new_asset_account": "t\u00e0i kho\u1ea3n m\u1edbi",
         "newTransfer": "Chuy\u1ec3n kho\u1ea3n m\u1edbi",
+        "submission_options": "Submission options",
+        "apply_rules_checkbox": "Apply rules",
+        "fire_webhooks_checkbox": "Fire webhooks",
         "newDeposit": "Ti\u1ec1n g\u1eedi m\u1edbi",
         "newWithdrawal": "Chi ph\u00ed m\u1edbi",
         "bills_paid": "H\u00f3a \u0111\u01a1n thanh to\u00e1n",
@@ -119,25 +142,25 @@ export default {
         "rule_trigger_any_external_url_choice": "Transaction has an external URL",
         "rule_trigger_no_external_url_choice": "Transaction has no external URL",
         "rule_trigger_id_choice": "Transaction ID is..",
-        "rule_action_delete_transaction_choice": "X\u00d3A giao d\u1ecbch (!)",
-        "rule_action_set_category_choice": "\u0110\u1eb7t th\u1ec3 lo\u1ea1i th\u00e0nh..",
+        "rule_action_delete_transaction_choice": "DELETE transaction(!)",
+        "rule_action_set_category_choice": "Set category to ..",
         "rule_action_clear_category_choice": "X\u00f3a m\u1ecdi danh m\u1ee5c",
-        "rule_action_set_budget_choice": "\u0110\u1eb7t ng\u00e2n s\u00e1ch th\u00e0nh..",
+        "rule_action_set_budget_choice": "Set budget to ..",
         "rule_action_clear_budget_choice": "X\u00f3a m\u1ecdi ng\u00e2n s\u00e1ch",
-        "rule_action_add_tag_choice": "Th\u00eam nh\u00e3n..",
-        "rule_action_remove_tag_choice": "X\u00f3a nh\u00e3n..",
+        "rule_action_add_tag_choice": "Add tag ..",
+        "rule_action_remove_tag_choice": "Remove tag ..",
         "rule_action_remove_all_tags_choice": "X\u00f3a t\u1ea5t c\u1ea3 c\u00e1c nh\u00e3n",
-        "rule_action_set_description_choice": "\u0110\u1eb7t m\u00f4 t\u1ea3 th\u00e0nh..",
-        "rule_action_update_piggy_choice": "Th\u00eam \/ x\u00f3a s\u1ed1 ti\u1ec1n giao d\u1ecbch trong heo \u0111\u1ea5t..",
-        "rule_action_append_description_choice": "N\u1ed1i m\u00f4 t\u1ea3 v\u1edbi..",
-        "rule_action_prepend_description_choice": "Chu\u1ea9n b\u1ecb m\u00f4 t\u1ea3 v\u1edbi..",
-        "rule_action_set_source_account_choice": "\u0110\u1eb7t t\u00e0i kho\u1ea3n ngu\u1ed3n th\u00e0nh..",
-        "rule_action_set_destination_account_choice": "\u0110\u1eb7t t\u00e0i kho\u1ea3n \u0111\u00edch th\u00e0nh..",
-        "rule_action_append_notes_choice": "N\u1ed1i ghi ch\u00fa v\u1edbi..",
-        "rule_action_prepend_notes_choice": "Chu\u1ea9n b\u1ecb ghi ch\u00fa v\u1edbi..",
+        "rule_action_set_description_choice": "Set description to ..",
+        "rule_action_update_piggy_choice": "Add \/ remove transaction amount in piggy bank ..",
+        "rule_action_append_description_choice": "Append description with ..",
+        "rule_action_prepend_description_choice": "Prepend description with ..",
+        "rule_action_set_source_account_choice": "Set source account to ..",
+        "rule_action_set_destination_account_choice": "Set destination account to ..",
+        "rule_action_append_notes_choice": "Append notes with ..",
+        "rule_action_prepend_notes_choice": "Prepend notes with ..",
         "rule_action_clear_notes_choice": "X\u00f3a m\u1ecdi ghi ch\u00fa",
-        "rule_action_set_notes_choice": "\u0110\u1eb7t ghi ch\u00fa cho..",
-        "rule_action_link_to_bill_choice": "Li\u00ean k\u1ebft \u0111\u1ebfn m\u1ed9t h\u00f3a \u0111\u01a1n..",
+        "rule_action_set_notes_choice": "Set notes to ..",
+        "rule_action_link_to_bill_choice": "Link to a bill ..",
         "rule_action_convert_deposit_choice": "Chuy\u1ec3n \u0111\u1ed5i giao d\u1ecbch th\u00e0nh ti\u1ec1n g\u1eedi",
         "rule_action_convert_withdrawal_choice": "Chuy\u1ec3n \u0111\u1ed5i giao d\u1ecbch sang r\u00fat ti\u1ec1n",
         "rule_action_convert_transfer_choice": "Chuy\u1ec3n \u0111\u1ed5i giao d\u1ecbch sang chuy\u1ec3n kho\u1ea3n",

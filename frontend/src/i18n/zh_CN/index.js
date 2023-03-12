@@ -1,3 +1,23 @@
+/*
+ * index.js
+ * Copyright (c) 2022 james@firefly-iii.org
+ *
+ * This file is part of Firefly III (https://github.com/firefly-iii).
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 export default {
     "config": {
         "html_language": "zh-cn",
@@ -45,10 +65,13 @@ export default {
         "delete": "\u5220\u9664",
         "reconcile": "\u5bf9\u8d26",
         "create_new_asset": "\u521b\u5efa\u65b0\u8d44\u4ea7\u8d26\u6237",
-        "confirm_action": "Confirm action",
+        "confirm_action": "\u786e\u8ba4\u64cd\u4f5c",
         "new_budget": "\u65b0\u9884\u7b97",
         "new_asset_account": "\u65b0\u8d44\u4ea7\u8d26\u6237",
         "newTransfer": "\u65b0\u8f6c\u8d26",
+        "submission_options": "Submission options",
+        "apply_rules_checkbox": "\u5e94\u7528\u89c4\u5219",
+        "fire_webhooks_checkbox": "\u89e6\u53d1 webhook",
         "newDeposit": "\u65b0\u6536\u5165",
         "newWithdrawal": "\u65b0\u652f\u51fa",
         "bills_paid": "\u5df2\u4ed8\u8d26\u5355",
@@ -82,13 +105,13 @@ export default {
         "rule_trigger_transaction_type_choice": "\u4ea4\u6613\u7c7b\u578b\u4e3a\u2026",
         "rule_trigger_category_is_choice": "\u5206\u7c7b\u4e3a...",
         "rule_trigger_amount_less_choice": "\u91d1\u989d\u5c0f\u4e8e\u2026",
-        "rule_trigger_amount_is_choice": "Amount is..",
+        "rule_trigger_amount_is_choice": "\u91d1\u989d\u662f...",
         "rule_trigger_amount_more_choice": "\u91d1\u989d\u5927\u4e8e\u2026",
         "rule_trigger_description_starts_choice": "\u63cf\u8ff0\u5f00\u5934\u4e3a...",
         "rule_trigger_description_ends_choice": "\u63cf\u8ff0\u7ed3\u5c3e\u4e3a...",
         "rule_trigger_description_contains_choice": "\u63cf\u8ff0\u5305\u542b\u2026",
         "rule_trigger_description_is_choice": "\u63cf\u8ff0\u4e3a\u2026",
-        "rule_trigger_date_on_choice": "Transaction date is..",
+        "rule_trigger_date_on_choice": "\u4ea4\u6613\u65e5\u671f\u4e3a...",
         "rule_trigger_date_before_choice": "\u4ea4\u6613\u65e5\u671f\u65e9\u4e8e...",
         "rule_trigger_date_after_choice": "\u4ea4\u6613\u65e5\u671f\u665a\u4e8e...",
         "rule_trigger_created_at_on_choice": "Transaction was made on..",
@@ -119,24 +142,24 @@ export default {
         "rule_trigger_any_external_url_choice": "\u4ea4\u6613\u6709\u4e00\u4e2a\u5916\u90e8URL",
         "rule_trigger_no_external_url_choice": "\u4ea4\u6613\u6ca1\u6709\u5916\u90e8\u94fe\u63a5",
         "rule_trigger_id_choice": "\u4ea4\u6613ID\u4e3a...",
-        "rule_action_delete_transaction_choice": "\u5220\u9664\u4ea4\u6613 (!)",
-        "rule_action_set_category_choice": "\u5c06\u5206\u7c7b\u8bbe\u4e3a\u2026",
+        "rule_action_delete_transaction_choice": "DELETE transaction(!)",
+        "rule_action_set_category_choice": "Set category to ..",
         "rule_action_clear_category_choice": "\u6e05\u7a7a\u4efb\u4f55\u5206\u7c7b",
-        "rule_action_set_budget_choice": "\u6dfb\u52a0\u5230\u9884\u7b97\u2026",
+        "rule_action_set_budget_choice": "Set budget to ..",
         "rule_action_clear_budget_choice": "\u6e05\u7a7a\u4efb\u4f55\u9884\u7b97",
-        "rule_action_add_tag_choice": "\u65b0\u589e\u6807\u7b7e\u2026",
-        "rule_action_remove_tag_choice": "\u79fb\u9664\u6807\u7b7e\u2026",
+        "rule_action_add_tag_choice": "Add tag ..",
+        "rule_action_remove_tag_choice": "Remove tag ..",
         "rule_action_remove_all_tags_choice": "\u79fb\u9664\u6240\u6709\u6807\u7b7e",
-        "rule_action_set_description_choice": "\u628a\u63cf\u8ff0\u8bbe\u7f6e\u4e3a\u2026",
-        "rule_action_update_piggy_choice": "\u6dfb\u52a0\/\u5220\u9664\u5b58\u94b1\u7f50\u4e2d\u7684\u4ea4\u6613\u91d1\u989d...",
-        "rule_action_append_description_choice": "\u63cf\u8ff0\u540e\u6dfb\u52a0\u2026",
-        "rule_action_prepend_description_choice": "\u63cf\u8ff0\u524d\u6dfb\u52a0\u2026",
-        "rule_action_set_source_account_choice": "\u5c06\u6765\u6e90\u8d26\u6237\u8bbe\u4e3a...",
-        "rule_action_set_destination_account_choice": "\u5c06\u76ee\u6807\u8d26\u6237\u8bbe\u4e3a\u2026",
-        "rule_action_append_notes_choice": "\u5907\u6ce8\u540e\u6dfb\u52a0...",
-        "rule_action_prepend_notes_choice": "\u5907\u6ce8\u524d\u6dfb\u52a0...",
+        "rule_action_set_description_choice": "Set description to ..",
+        "rule_action_update_piggy_choice": "Add \/ remove transaction amount in piggy bank ..",
+        "rule_action_append_description_choice": "Append description with ..",
+        "rule_action_prepend_description_choice": "Prepend description with ..",
+        "rule_action_set_source_account_choice": "Set source account to ..",
+        "rule_action_set_destination_account_choice": "Set destination account to ..",
+        "rule_action_append_notes_choice": "Append notes with ..",
+        "rule_action_prepend_notes_choice": "Prepend notes with ..",
         "rule_action_clear_notes_choice": "\u79fb\u9664\u6240\u6709\u5907\u6ce8",
-        "rule_action_set_notes_choice": "\u8bbe\u5b9a\u5907\u6ce8\u81f3\u2026",
+        "rule_action_set_notes_choice": "Set notes to ..",
         "rule_action_link_to_bill_choice": "\u5173\u8054\u81f3\u8d26\u5355\u2026",
         "rule_action_convert_deposit_choice": "\u8f6c\u6362\u4ea4\u6613\u4e3a\u6536\u5165",
         "rule_action_convert_withdrawal_choice": "\u8f6c\u6362\u4ea4\u6613\u4e3a\u652f\u51fa",
@@ -197,8 +220,8 @@ export default {
         "pref_last90": "\u6700\u8fd190\u5929",
         "pref_last30": "\u6700\u8fd1 30 \u5929",
         "pref_last7": "\u6700\u8fd17\u5929",
-        "pref_YTD": "Year to date",
-        "pref_QTD": "Quarter to date",
-        "pref_MTD": "Month to date"
+        "pref_YTD": "\u4eca\u5e74\u81f3\u4eca",
+        "pref_QTD": "\u672c\u5b63\u5ea6\u81f3\u4eca",
+        "pref_MTD": "\u672c\u6708\u81f3\u4eca"
     }
 }

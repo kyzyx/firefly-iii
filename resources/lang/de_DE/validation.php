@@ -53,7 +53,7 @@ return [
     'require_repeat_until'           => 'Erfordert entweder eine Anzahl von Wiederholungen oder ein Enddatum (repeat_until). Nicht beides.',
     'require_currency_info'          => 'Der Inhalt dieses Feldes ist ohne Währungsinformationen ungültig.',
     'not_transfer_account'           => 'Dieses Konto ist kein Konto, welches für Buchungen genutzt werden kann.',
-    'require_currency_amount'        => 'Der Inhalt dieses Feldes ist ohne Fremdbetragsangaben ungültig.',
+    'require_currency_amount'        => 'Der Inhalt dieses Feldes ist ohne Eingabe eines Betrags in Fremdwährung ungültig.',
     'equal_description'              => 'Die Transaktionsbeschreibung darf nicht der globalen Beschreibung entsprechen.',
     'file_invalid_mime'              => 'Die Datei „:name” ist vom Typ „:mime”, welcher nicht zum Hochladen zugelassen ist.',
     'file_too_large'                 => 'Die Datei „:name” ist zu groß.',
@@ -141,8 +141,8 @@ return [
     'unique_piggy_bank_for_user'     => 'Der Name des Sparschweins muss eindeutig sein.',
     'unique_object_group'            => 'Der Gruppenname muss eindeutig sein',
     'starts_with'                    => 'Der Wert muss mit :values beginnen.',
-    'unique_webhook'                 => 'Sie haben bereits einen Webhook mit diesen Werten.',
-    'unique_existing_webhook'        => 'Sie haben bereits einen anderen Webhook mit diesen Werten.',
+    'unique_webhook'                 => 'Sie haben bereits einen Webhook mit dieser Kombination aus URL, Trigger, Antwort und Auslieferung.',
+    'unique_existing_webhook'        => 'Sie haben bereits einen weiteren Webhook mit dieser Kombination aus URL, Trigger, Antwort und Auslieferung.',
     'same_account_type'              => 'Beide Konten müssen vom selben Kontotyp sein',
     'same_account_currency'          => 'Beiden Konten muss die gleiche Währung zugeordnet sein',
 
@@ -194,6 +194,8 @@ return [
     'withdrawal_dest_need_data'   => 'Um fortzufahren, benötigen Sie eine gültige Zielkontenkennung und/oder einen gültigen Zielkontonamen.',
     'withdrawal_dest_bad_data'    => 'Bei der Suche nach Kennung „:id” oder Name „:name” konnte kein gültiges Zielkonto gefunden werden.',
 
+    'reconciliation_source_bad_data' => 'Bei der Suche nach ID „:id” oder Name „:name” konnte kein gültiges Ausgleichskonto gefunden werden.',
+
     'generic_source_bad_data' => 'Bei der Suche nach der Kennung „:id” oder dem Namen „:name” konnte kein gültiges Quellkonto gefunden werden.',
 
     'deposit_source_need_data' => 'Um fortzufahren, benötigen Sie eine gültige Quellkontenkennung und/oder einen gültigen Quellkontonamen.',
@@ -208,10 +210,11 @@ return [
     'transfer_dest_bad_data'    => 'Bei der Suche nach der Kennung „:id” oder dem Namen „:name” konnte kein gültiges Zielkonto gefunden werden.',
     'need_id_in_edit'           => 'Jeder Aufteilungen muss eine transaction_journal_id (entweder gültige ID oder 0) aufweisen.',
 
-    'ob_source_need_data' => 'Sie benötigen eine gültige Quellkontonummer und/oder einen gültigen Quellkontonamen, um fortzufahren.',
-    'lc_source_need_data' => 'Zum Fortfahren wird eine gültige Quellkonto-ID benötigt.',
-    'ob_dest_need_data'   => 'Sie benötigen eine gültige Zielkontennummer und/oder einen gültigen Zielkontonamen, um fortzufahren.',
-    'ob_dest_bad_data'    => 'Bei der Suche nach der ID ":id" oder dem Namen ":name" konnte kein gültiges Zielkonto gefunden werden.',
+    'ob_source_need_data'           => 'Sie benötigen eine gültige Quellkontonummer und/oder einen gültigen Quellkontonamen, um fortzufahren.',
+    'lc_source_need_data'           => 'Zum Fortfahren wird eine gültige Quellkonto-ID benötigt.',
+    'ob_dest_need_data'             => 'Sie benötigen eine gültige Zielkontennummer und/oder einen gültigen Zielkontonamen, um fortzufahren.',
+    'ob_dest_bad_data'              => 'Bei der Suche nach der ID ":id" oder dem Namen ":name" konnte kein gültiges Zielkonto gefunden werden.',
+    'reconciliation_either_account' => 'Um einen Abgleich zu übermitteln, müssen Sie entweder ein Quell- oder ein Zielkonto angeben. Nicht beides, nicht keines von beiden.',
 
     'generic_invalid_source'      => 'Sie können dieses Konto nicht als Quellkonto verwenden.',
     'generic_invalid_destination' => 'Sie können dieses Konto nicht als Zielkonto verwenden.',

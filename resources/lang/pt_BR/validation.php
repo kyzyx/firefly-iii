@@ -141,8 +141,8 @@ return [
     'unique_piggy_bank_for_user'     => 'O nome do cofrinho deve ser único.',
     'unique_object_group'            => 'O nome do grupo deve ser único',
     'starts_with'                    => 'O valor deve começar com :values.',
-    'unique_webhook'                 => 'Você já tem um webhook com esses valores.',
-    'unique_existing_webhook'        => 'Você já tem outro webhook com esses valores.',
+    'unique_webhook'                 => 'Você já tem um webhook com esta combinação de URL, gatilho, resposta e entrega.',
+    'unique_existing_webhook'        => 'Você já tem outro webhook com esta combinação de URL, gatilho, resposta e entrega.',
     'same_account_type'              => 'Ambas as contas devem ser do mesmo tipo',
     'same_account_currency'          => 'Ambas as contas devem ter a mesma configuração de moeda',
 
@@ -194,6 +194,8 @@ return [
     'withdrawal_dest_need_data'   => 'É necessário obter um ID de uma conta de destino válida e/ou um nome de conta de destino válido para continuar.',
     'withdrawal_dest_bad_data'    => 'Não foi possível encontrar uma conta de destino válida ao pesquisar por ID ":id" ou nome ":name".',
 
+    'reconciliation_source_bad_data' => 'Could not find a valid reconciliation account when searching for ID ":id" or name ":name".',
+
     'generic_source_bad_data' => 'Não foi possível encontrar uma conta de origem válida ao pesquisar pelo ID ":id" ou pelo nome ":name".',
 
     'deposit_source_need_data' => 'É necessário obter um ID de uma conta de origem válida e/ou um nome de conta de origem válido para continuar.',
@@ -208,10 +210,11 @@ return [
     'transfer_dest_bad_data'    => 'Não foi possível encontrar uma conta de destino válida ao pesquisar por ID ":id" ou nome ":name".',
     'need_id_in_edit'           => 'Cada divisão deve ter transaction_journal_id (ID válido ou 0).',
 
-    'ob_source_need_data' => 'É necessário obter um ID de uma conta de origem válida e/ou um nome de conta de origem válido para continuar.',
-    'lc_source_need_data' => 'É necessário obter um ID de uma conta de origem válida para continuar.',
-    'ob_dest_need_data'   => 'É necessário obter um ID de uma conta de origem válida e/ou um nome de conta de origem válido para continuar.',
-    'ob_dest_bad_data'    => 'Não foi possível encontrar uma conta de destino válida ao pesquisar por ID ":id" ou nome ":name".',
+    'ob_source_need_data'           => 'É necessário obter um ID de uma conta de origem válida e/ou um nome de conta de origem válido para continuar.',
+    'lc_source_need_data'           => 'É necessário obter um ID de uma conta de origem válida para continuar.',
+    'ob_dest_need_data'             => 'É necessário obter um ID de uma conta de origem válida e/ou um nome de conta de origem válido para continuar.',
+    'ob_dest_bad_data'              => 'Não foi possível encontrar uma conta de destino válida ao pesquisar por ID ":id" ou nome ":name".',
+    'reconciliation_either_account' => 'Para enviar uma reconciliação, você deve enviar uma conta de origem ou de destino. Não ambos, nem nenhum.',
 
     'generic_invalid_source'      => 'Você não pode usar esta conta como conta de origem.',
     'generic_invalid_destination' => 'Você não pode usar esta conta como conta de destino.',

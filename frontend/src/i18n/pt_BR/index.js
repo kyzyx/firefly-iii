@@ -1,3 +1,23 @@
+/*
+ * index.js
+ * Copyright (c) 2022 james@firefly-iii.org
+ *
+ * This file is part of Firefly III (https://github.com/firefly-iii).
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 export default {
     "config": {
         "html_language": "pt-br",
@@ -49,6 +69,9 @@ export default {
         "new_budget": "Novo or\u00e7amento",
         "new_asset_account": "Nova conta de ativo",
         "newTransfer": "Nova transfer\u00eancia",
+        "submission_options": "Op\u00e7\u00f5es de envio",
+        "apply_rules_checkbox": "Aplicar regras",
+        "fire_webhooks_checkbox": "Acionar webhooks",
         "newDeposit": "Novo dep\u00f3sito",
         "newWithdrawal": "Nova despesa",
         "bills_paid": "Contas pagas",
@@ -119,25 +142,25 @@ export default {
         "rule_trigger_any_external_url_choice": "A transa\u00e7\u00e3o tem um link externo",
         "rule_trigger_no_external_url_choice": "A transa\u00e7\u00e3o n\u00e3o tem um link externo",
         "rule_trigger_id_choice": "O identificador da transa\u00e7\u00e3o \u00e9..",
-        "rule_action_delete_transaction_choice": "EXCLUIR transa\u00e7\u00e3o (!)",
-        "rule_action_set_category_choice": "Definir a categoria para..",
+        "rule_action_delete_transaction_choice": "DELETE transaction(!)",
+        "rule_action_set_category_choice": "Set category to ..",
         "rule_action_clear_category_choice": "Limpar qualquer categoria",
-        "rule_action_set_budget_choice": "Definir or\u00e7amento para..",
+        "rule_action_set_budget_choice": "Set budget to ..",
         "rule_action_clear_budget_choice": "Limpar qualquer or\u00e7amento",
-        "rule_action_add_tag_choice": "Adicionar tag..",
-        "rule_action_remove_tag_choice": "Remover tag..",
+        "rule_action_add_tag_choice": "Add tag ..",
+        "rule_action_remove_tag_choice": "Remove tag ..",
         "rule_action_remove_all_tags_choice": "Remover todas as tags",
-        "rule_action_set_description_choice": "Definir descri\u00e7\u00e3o para..",
-        "rule_action_update_piggy_choice": "Adicionar\/remover o valor da transa\u00e7\u00e3o no cofrinho..",
-        "rule_action_append_description_choice": "Acrescentar a descri\u00e7\u00e3o com..",
-        "rule_action_prepend_description_choice": "Preceder a descri\u00e7\u00e3o com..",
-        "rule_action_set_source_account_choice": "Definir conta de origem para...",
-        "rule_action_set_destination_account_choice": "Definir conta de destino para...",
-        "rule_action_append_notes_choice": "Anexar notas com..",
-        "rule_action_prepend_notes_choice": "Preceder notas com..",
+        "rule_action_set_description_choice": "Set description to ..",
+        "rule_action_update_piggy_choice": "Add \/ remove transaction amount in piggy bank ..",
+        "rule_action_append_description_choice": "Append description with ..",
+        "rule_action_prepend_description_choice": "Prepend description with ..",
+        "rule_action_set_source_account_choice": "Set source account to ..",
+        "rule_action_set_destination_account_choice": "Set destination account to ..",
+        "rule_action_append_notes_choice": "Append notes with ..",
+        "rule_action_prepend_notes_choice": "Prepend notes with ..",
         "rule_action_clear_notes_choice": "Remover quaisquer notas",
-        "rule_action_set_notes_choice": "Defina notas para..",
-        "rule_action_link_to_bill_choice": "Vincular a uma conta..",
+        "rule_action_set_notes_choice": "Set notes to ..",
+        "rule_action_link_to_bill_choice": "Link to a bill ..",
         "rule_action_convert_deposit_choice": "Converter esta transfer\u00eancia em entrada",
         "rule_action_convert_withdrawal_choice": "Converter esta transa\u00e7\u00e3o para uma sa\u00edda",
         "rule_action_convert_transfer_choice": "Converter esta transa\u00e7\u00e3o para transfer\u00eancia",
