@@ -216,9 +216,12 @@ class GenericRequest extends FormRequest
     public function getExpenseAccounts(): Collection
     {
         $this->parseAccounts();
-        return $this->accounts->filter(function($value, $key) {
+        $return = $this->accounts->filter(function($value, $key) {
             $type = $value->accountType->type;
             return $type === AccountType::EXPENSE;
+        });
+        return $return->sortBy(function($value, $key) {
+            return $value->name;
         });
     }
 
@@ -228,9 +231,12 @@ class GenericRequest extends FormRequest
     public function getRevenueAccounts(): Collection
     {
         $this->parseAccounts();
-        return $this->accounts->filter(function($value, $key) {
+        $return = $this->accounts->filter(function($value, $key) {
             $type = $value->accountType->type;
             return $type === AccountType::REVENUE;
+        });
+        return $return->sortBy(function($value, $key) {
+            return $value->name;
         });
     }
 
