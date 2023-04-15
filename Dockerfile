@@ -19,9 +19,14 @@ RUN apt-get -y install git
 #### Run from current source
 #COPY ./ $FIREFLY_III_PATH
 #### Run from particular branch
+ADD "https://api.github.com/repos/kyzyx/firefly-iii/commits?per_page=1" latest_commit
 RUN git clone --no-checkout https://github.com/kyzyx/firefly-iii.git $FIREFLY_III_PATH/tmp
 RUN mv $FIREFLY_III_PATH/tmp/.git $FIREFLY_III_PATH && rm -rf $FIREFLY_III_PATH/tmp
 RUN git reset --hard HEAD
+RUN git checkout origin/main
+#RUN git clone https://github.com/kyzyx/firefly-iii.git $FIREFLY_III_PATH/tmp
+#RUN mv $FIREFLY_III_PATH/tmp/* $FIREFLY_III_PATH
+
 
 RUN chmod -R 775 $FIREFLY_III_PATH && \
     composer install --prefer-dist --no-dev --no-scripts && /usr/local/bin/finalize-image.sh

@@ -1,7 +1,8 @@
 PORT=4049
 CONTAINER=firefly-dev
-docker stop $(docker ps -aq --filter "name=$CONTAINER")
-docker rm $(docker ps -aq --filter "name=$CONTAINER")
+ID=`docker ps -aq --filter "ancestor=$CONTAINER"`
+docker stop $ID
+docker rm $ID
 docker build -t $CONTAINER --platform linux/amd64 --build-arg build_base=apache --build-arg build_platform=8.0 .
 docker run -d \
 -v /volume1/docker/firefly/storage/upload:/var/www/firefly-iii/storage/upload \
