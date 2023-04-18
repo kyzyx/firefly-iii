@@ -246,7 +246,7 @@ class AccountRepository implements AccountRepositoryInterface
         }
         $query->where('active', true);
         $query->orderBy('accounts.account_type_id', 'ASC');
-        $query->orderBy('accounts.order', 'ASC');
+        //$query->orderBy('accounts.order', 'ASC');
         $query->orderBy('accounts.name', 'ASC');
 
         return $query->get(['accounts.*']);
@@ -601,9 +601,9 @@ class AccountRepository implements AccountRepositoryInterface
         }
 
         if (empty($sort)) {
-            if (!empty($res)) {
-                $query->orderBy('accounts.order', 'ASC');
-            }
+            //if (!empty($res)) {
+                //$query->orderBy('accounts.order', 'ASC');
+            //}
             $query->orderBy('accounts.active', 'DESC');
             $query->orderBy('accounts.name', 'ASC');
         }
