@@ -123,7 +123,7 @@ class GenericRequest extends FormRequest
             }
         }
 
-        return $return;
+        return $return->sortBy(static fn (Account $account): string => $account->name)->values();
     }
 
     public function getRevenueAccounts(): Collection
@@ -139,7 +139,7 @@ class GenericRequest extends FormRequest
             }
         }
 
-        return $return;
+        return $return->sortBy(static fn (Account $account): string => $account->name)->values();
     }
 
     public function getStart(): Carbon

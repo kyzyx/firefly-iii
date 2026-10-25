@@ -283,9 +283,7 @@ class AccountRepository implements AccountRepositoryInterface, UserGroupInterfac
         }
 
         if (0 === $sorted) {
-            if (0 !== count($res)) {
-                $query->orderBy('accounts.order', 'ASC');
-            }
+            // sort by name instead of the manual account order.
             $query->orderBy('accounts.active', 'DESC');
             $query->orderBy('accounts.name', 'ASC');
             $query->orderBy('accounts.account_type_id', 'ASC');
@@ -323,9 +321,7 @@ class AccountRepository implements AccountRepositoryInterface, UserGroupInterfac
         }
 
         if (0 === $sorted) {
-            if (0 !== count($res)) {
-                $query->orderBy('accounts.order', 'ASC');
-            }
+            // sort by name instead of the manual account order.
             $query->orderBy('accounts.active', 'DESC');
             $query->orderBy('accounts.name', 'ASC');
             $query->orderBy('accounts.account_type_id', 'ASC');
@@ -358,7 +354,6 @@ class AccountRepository implements AccountRepositoryInterface, UserGroupInterfac
         }
         $query->where('active', true);
         $query->orderBy('accounts.account_type_id', 'ASC');
-        $query->orderBy('accounts.order', 'ASC');
         $query->orderBy('accounts.name', 'ASC');
 
         return $query->get(['accounts.*']);

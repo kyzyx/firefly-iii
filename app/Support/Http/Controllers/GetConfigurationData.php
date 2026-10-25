@@ -96,56 +96,28 @@ trait GetConfigurationData
         /** @var Carbon $first */
         $first          = session('first');
         $title          = sprintf('%s - %s', $start->isoFormat($this->monthAndDayFormat), $end->isoFormat($this->monthAndDayFormat));
-        $isCustom       = true === session('is_custom_range', false);
         $today          = today(config('app.timezone'));
-        $ranges         = [
-            // first range is the current range:
-            $title => [$start, $end],
-        ];
+        $ranges         = [];
         Log::debug(sprintf('dateRange: the date range in the session is"%s" - "%s"', $start->format('Y-m-d'), $end->format('Y-m-d')));
 
-        // when current range is a custom range, add the current period as the next range.
-        if ($isCustom) {
-            $index             = Navigation::periodShow($start, $viewRange);
-            $customPeriodStart = Navigation::startOfPeriod($start, $viewRange);
-            $customPeriodEnd   = Navigation::endOfPeriod($customPeriodStart, $viewRange);
-            $ranges[$index]    = [$customPeriodStart, $customPeriodEnd];
-        }
-        // then add previous range and next range, but skip this for the lastX and YTD stuff.
-        if (!in_array($viewRange, config('firefly.dynamic_date_ranges', []), true)) {
-            $previousDate   = Navigation::subtractPeriod($start, $viewRange);
-            $index          = Navigation::periodShow($previousDate, $viewRange);
-            $previousStart  = Navigation::startOfPeriod($previousDate, $viewRange);
-            $previousEnd    = Navigation::endOfPeriod($previousStart, $viewRange);
-            $ranges[$index] = [$previousStart, $previousEnd];
-
-            $nextDate       = Navigation::addPeriod($start, $viewRange);
-            $index          = Navigation::periodShow($nextDate, $viewRange);
-            $nextStart      = Navigation::startOfPeriod($nextDate, $viewRange);
-            $nextEnd        = Navigation::endOfPeriod($nextStart, $viewRange);
-            $ranges[$index] = [$nextStart, $nextEnd];
+        // fixed presets instead of ranges relative to the current view range:
+        // current month, previous month, current year and the two years before it.
+        foreach ([['1M', 0], ['1M', 1], ['1Y', 0], ['1Y', 1], ['1Y', 2]] as [$period, $back]) {
+            $date = $today->clone();
+            for ($i = 0; $i < $back; ++$i) {
+                $date = Navigation::subtractPeriod($date, $period);
+            }
+            $rangeStart     = Navigation::startOfPeriod($date, $period);
+            $rangeEnd       = Navigation::endOfPeriod($rangeStart, $period);
+            $index          = Navigation::periodShow($rangeStart, $period);
+            $ranges[$index] = [$rangeStart, $rangeEnd];
         }
 
-        // today:
-        /** @var Carbon $todayStart */
-        $todayStart     = Navigation::startOfPeriod($today, $viewRange);
-
-        /** @var Carbon $todayEnd */
-        $todayEnd       = Navigation::endOfPeriod($todayStart, $viewRange);
-
-        if ($todayStart->ne($start) || $todayEnd->ne($end)) {
-            $ranges[ucfirst((string) trans('firefly.today'))] = [$todayStart, $todayEnd];
+        // last 30, 90, 180 and 365 days:
+        foreach ([30 => 'pref_last30', 90 => 'pref_last90', 180 => 'last_180_days', 365 => 'pref_last365'] as $days => $key) {
+            $index          = (string) trans(sprintf('firefly.%s', $key));
+            $ranges[$index] = [today(config('app.timezone'))->subDays($days), new Carbon()];
         }
-
-        // last seven days:
-        $seven          = today(config('app.timezone'))->subDays(7);
-        $index          = (string) trans('firefly.last_seven_days');
-        $ranges[$index] = [$seven, new Carbon()];
-
-        // last 30 days:
-        $thirty         = today(config('app.timezone'))->subDays(30);
-        $index          = (string) trans('firefly.last_thirty_days');
-        $ranges[$index] = [$thirty, new Carbon()];
 
         // month to date:
         $monthBegin     = today(config('app.timezone'))->startOfMonth();
@@ -156,11 +128,6 @@ trait GetConfigurationData
         $yearBegin      = today(config('app.timezone'))->startOfYear();
         $index          = (string) trans('firefly.year_to_date');
         $ranges[$index] = [$yearBegin, new Carbon()];
-
-        // previous year:
-        $yearBegin      = today(config('app.timezone'))->subYear()->startOfYear();
-        $index          = (string) trans('firefly.previous_year', ['year' => $yearBegin->year]);
-        $ranges[$index] = [$yearBegin, $yearBegin->clone()->endOfYear()];
 
         // everything
         $index          = (string) trans('firefly.everything');
